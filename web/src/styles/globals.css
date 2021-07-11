@@ -1,3 +1,17 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  @font-face {
+    font-family: "Alata";
+    src: url("/fonts/Alata/Alata-Regular.ttf");
+    font-weight: 400;
+    font-style: normal;
+  }
+}
+
+* {
+  font-family: "Alata";
+  color: rgba(243, 244, 246); /* text-gray-100 */
+}
