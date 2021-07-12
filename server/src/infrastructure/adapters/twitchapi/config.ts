@@ -4,7 +4,10 @@ import { TwitchApi } from "./TwitchApi";
 import * as SearchChannelsInputSchema from "./schemas/SearchChannelsInput.schema.json";
 import * as SearchChannelsOutputSchema from "./schemas/SearchChannelsOutput.schema.json";
 
-import {SearchChannelsInput, SearchChannelsOutput} from "./interfaces/SearchChannels.interface";
+import {
+  SearchChannelsInput,
+  SearchChannelsOutput,
+} from "./interfaces/SearchChannels.interface";
 
 const ajv = new Ajv();
 
@@ -15,7 +18,9 @@ export const TwitchApiAdapter = {
   }),
   refreshSetup: async (): Promise<number> => TwitchApiAdapter.API.setup(),
   run: async (): Promise<void> => {
-    // await TwitchApiAdapter.refreshSetup();
+    if (process.env.ENABLE_TWITCHAPI === "true") {
+      await TwitchApiAdapter.refreshSetup();
+    }
     // const nextSetupTime = 250;
     setTimeout(
       TwitchApiAdapter.refreshSetup,
@@ -25,7 +30,7 @@ export const TwitchApiAdapter = {
   Validators: {
     SearchChannels: {
       input: ajv.compile<SearchChannelsInput>(SearchChannelsInputSchema),
-      output: ajv.compile<SearchChannelsOutput>(SearchChannelsOutputSchema)
-    }
-  }
+      output: ajv.compile<SearchChannelsOutput>(SearchChannelsOutputSchema),
+    },
+  },
 };
