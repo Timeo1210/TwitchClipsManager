@@ -13,19 +13,6 @@ app.use(
 );
 app.use(helmet());
 
-// catch 404
-app.use((_, res) => {
-  const err = new Error("Not Found");
-
-  res.status(404);
-  res.json({
-    errors: {
-      message: err.message,
-      error: err,
-    },
-  });
-});
-
 const port = process.env.PORT || 3000;
 export const expressController = {
   expressApp: app,
