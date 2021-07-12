@@ -8,6 +8,7 @@ import { buildSchema } from "type-graphql";
 import { expressController } from "@/interface-adapters/controllers/express/config";
 
 import { HelloResolver } from "./resolvers/hello.resolver";
+import { SearchChannelsResolver } from "./resolvers/searchChannels.resolver";
 
 export const apolloController = {
   run: async () => {
@@ -18,7 +19,7 @@ export const apolloController = {
           : ApolloServerPluginLandingPageGraphQLPlayground(),
       ],
       schema: await buildSchema({
-        resolvers: [HelloResolver],
+        resolvers: [HelloResolver, SearchChannelsResolver],
       }),
     });
     await apolloServer.start();
