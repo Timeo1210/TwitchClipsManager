@@ -11,7 +11,12 @@ app.use(
     origin: process.env.CORS_ORIGIN,
   })
 );
-app.use(helmet());
+app.use(
+  helmet({
+    contentSecurityPolicy:
+      process.env.NODE_ENV === "production" ? undefined : false,
+  })
+);
 
 const port = process.env.PORT || 3000;
 export const expressController = {
