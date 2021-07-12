@@ -1,5 +1,8 @@
+import "dotenv-safe/config";
+
 import { initAdapters } from "@/infrastructure/adapters/init";
 import { initControllers } from "@/interface-adapters/controllers/init";
+
 import { ChannelService } from "@/core/services/channel.service";
 
 (async () => {

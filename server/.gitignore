@@ -3,4 +3,5 @@ build
 dist
 .env.development
 .env.production
+.env
 *.tar
