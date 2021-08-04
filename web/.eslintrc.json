@@ -22,6 +22,14 @@
   "plugins": ["@typescript-eslint", "react", "react-hooks", "prettier"],
   "rules": {
     "react/jsx-props-no-spreading": "off",
-    "import/no-extraneous-dependencies": ["error", {"packageDir": "./web/"}] // tricky but needed for the others package.json in project
+    "jsx-a11y/anchor-is-valid": [
+      "error",
+      {
+        "components": ["Link"],
+        "specialLink": ["hrefLeft", "hrefRight"],
+        "aspects": ["invalidHref", "preferButton"]
+      }
+    ],
+    "import/no-extraneous-dependencies": ["error", { "packageDir": "./web/" }] // tricky but needed for the others package.json in project
   }
 }
