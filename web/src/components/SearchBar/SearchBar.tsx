@@ -1,8 +1,27 @@
-import React, { useState } from "react";
-import Image from "next/image";
+import React, { useRef, useState } from "react";
+import { useSearchChannelsQuery } from "@/API";
+import SearchInput from "./SearchInput";
+import SearchItem from "./SearchItem";
 
 const SearchBar = (): JSX.Element => {
+  const areaRef = useRef<HTMLDivElement>(null);
   const [queryResponseVisible, setQueryResponseVisible] = useState(false);
+  const [inputValue, setInputValue] = useState("");
+
+  const { isLoading, isError, data } = useSearchChannelsQuery(
+    {
+      query: inputValue,
+      first: 5,
+    },
+    {
+      staleTime: Infinity,
+      refetchOnMount: false,
+      refetchOnReconnect: false,
+      refetchOnWindowFocus: false,
+      retry: false,
+    }
+  );
+  const channels = data?.search || [];
 
   const showQueryResponse = () => {
     setQueryResponseVisible(true);
@@ -16,23 +35,26 @@ const SearchBar = (): JSX.Element => {
     }
   };
 
+  const handleInputChange: React.ChangeEventHandler<HTMLInputElement> = (
+    event
+  ) => {
+    const { value } = event.target;
+    if (value.length > 3 || value.length === 0) {
+      setInputValue(value);
+    }
+  };
+
   return (
-    <div onBlur={handleBlur} role="search" className="w-full max-w-md relative">
-      <div
-        onFocus={showQueryResponse}
-        className="flex flex-row w-full relative z-20 p-2"
-      >
-        <input
-          className="bg-gray-600 rounded-tl-md rounded-bl-md py-2 px-4 pr-8 w-full border-2 border-transparent hover:border-gray-500 transition duration-100 ease-linear"
-          placeholder="Rechercher"
-        />
-        <button
-          type="button"
-          className="flex justify-center items-center bg-gray-900 px-3 rounded-tr-md rounded-br-md ml-1"
-        >
-          <Image src="/images/icon-search.svg" height={20} width={20} />
-        </button>
-      </div>
+    <div
+      ref={areaRef}
+      onBlur={handleBlur}
+      role="search"
+      className="w-full max-w-md relative"
+    >
+      <SearchInput
+        showQueryResponse={showQueryResponse}
+        handleInputChange={handleInputChange}
+      />
       <div
         className="absolute top-0 z-10 bg-gray-800 w-full rounded-md p-2"
         style={{
@@ -42,14 +64,15 @@ const SearchBar = (): JSX.Element => {
         }}
       >
         <div className="invisible">
-          <input
-            className="bg-gray-600 rounded-tl-md rounded-bl-md p-2 px-4 pr-8 w-full border-2 border-transparent hover:border-gray-500 transition duration-100 ease-linear"
-            placeholder="Rechercher"
-          />
+          <SearchInput />
         </div>
-        <div className="pt-2">
-          <p>Query response here</p>
-          <button type="button">HELLO</button>
+        <div className={`${isLoading || isError ? "flex justify-center" : ""}`}>
+          {isLoading && <p>loading...</p>}
+          {isError && <p>An error occurred !</p>}
+          {channels &&
+            channels.map((value) => (
+              <SearchItem key={value.id} value={value} />
+            ))}
         </div>
       </div>
     </div>
