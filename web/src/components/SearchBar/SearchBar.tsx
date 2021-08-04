@@ -1,4 +1,5 @@
-import React, { useRef, useState } from "react";
+import { useRef, useState } from "react";
+import * as React from "react";
 import { useSearchChannelsQuery } from "@/API";
 import SearchInput from "./SearchInput";
 import SearchItem from "./SearchItem";

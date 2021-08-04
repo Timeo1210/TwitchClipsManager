@@ -1,4 +1,3 @@
-import React from "react";
 import Link from "next/link";
 import { UnpackedArray } from "@/utils/UnpackedArray";
 import { SearchChannelsQuery } from "@/API";
