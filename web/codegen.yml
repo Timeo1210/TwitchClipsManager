@@ -8,7 +8,7 @@ generates:
       - "typescript-operations"
       - "typescript-react-query"
     config:
-      fetcher:
-        endpoint: "process.env.NEXT_PUBLIC_API_URL"
-        fetchParams:
-          headers: {"Content-Type": "application/json"}
+      fetcher: "@/utils/graphqlFetcher#customFetcher"
+        # endpoint: "process.env.NEXT_PUBLIC_API_URL"
+        # fetchParams:
+        #   headers: {"Content-Type": "application/json"}
