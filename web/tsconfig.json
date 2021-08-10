@@ -21,6 +21,7 @@
       "@/components/*": ["src/components/*"],
       "@/utils/*": ["src/utils/*"],
       "@/hooks/*": ["src/hooks/*"],
+      "@/contexts/*": ["src/contexts/*"],
       "@/API": ["src/generated/graphql.ts"]
     }
   },
