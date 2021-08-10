@@ -4,6 +4,7 @@ import {
   SearchChannelsInput,
   SearchChannelsOutput,
 } from "./interfaces/SearchChannels.interface";
+import { GetUserInput, GetUserOutput } from "./interfaces/GetUser.interface";
 
 interface ClientInterface {
   id: string;
@@ -77,5 +78,14 @@ export class TwitchApi {
       params: input,
     } as AxiosRequestConfig;
     return (await this.makeRequest(config)).data as SearchChannelsOutput[];
+  }
+
+  public async getUsers(input: GetUserInput): Promise<GetUserOutput[]> {
+    const config = {
+      method: "GET",
+      url: "/users",
+      params: input,
+    } as AxiosRequestConfig;
+    return (await this.makeRequest(config)).data as GetUserOutput[];
   }
 }

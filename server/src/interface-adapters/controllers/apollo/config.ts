@@ -9,6 +9,7 @@ import { expressController } from "@/interface-adapters/controllers/express/conf
 
 import { HelloResolver } from "./resolvers/hello.resolver";
 import { SearchChannelsResolver } from "./resolvers/searchChannels.resolver";
+import { ChannelResolver } from "./resolvers/Channel.resolver";
 
 export const apolloController = {
   run: async () => {
@@ -19,7 +20,7 @@ export const apolloController = {
           : ApolloServerPluginLandingPageGraphQLPlayground(),
       ],
       schema: await buildSchema({
-        resolvers: [HelloResolver, SearchChannelsResolver],
+        resolvers: [HelloResolver, SearchChannelsResolver, ChannelResolver],
       }),
     });
     await apolloServer.start();

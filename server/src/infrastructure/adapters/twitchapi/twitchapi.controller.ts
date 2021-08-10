@@ -1,6 +1,10 @@
 import { TwitchApiAdapter } from "./config";
 
-import { SearchChannelsInput, SearchChannelsOutput } from "./interfaces/SearchChannels.interface";
+import {
+  SearchChannelsInput,
+  SearchChannelsOutput,
+} from "./interfaces/SearchChannels.interface";
+import { GetUserInput, GetUserOutput } from "./interfaces/GetUser.interface";
 
 const { API, Validators } = TwitchApiAdapter;
 // no direct expoprt
@@ -17,6 +21,13 @@ const searchChannels = async (
   return [];
 };
 
+const getUser = async (input: GetUserInput): Promise<GetUserOutput | null> => {
+  const data = await API.getUsers(input);
+  if (data.length >= 1) return data[0];
+  return null;
+};
+
 export const twitchapiController = {
   searchChannels,
-}
+  getUser,
+};
