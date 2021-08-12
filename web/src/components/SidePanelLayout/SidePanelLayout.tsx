@@ -2,15 +2,11 @@ import React, { HTMLAttributes, PropsWithChildren, useState } from "react";
 import { animated, useSpring, config } from "react-spring";
 import BurgerLogo from "@/components/BurgerLogo";
 
-const defaultProps = {
-  wrapperClasses: "",
-};
-
 type SidePanelProps = {
   menu: JSX.Element;
   width: number;
   wrapperClasses?: HTMLAttributes<HTMLDivElement>["className"];
-} & typeof defaultProps;
+};
 
 const springConfig = {
   ...config.wobbly,
@@ -69,6 +65,8 @@ const SidePanelLayout = ({
   );
 };
 
-SidePanelLayout.defaultProps = defaultProps;
+SidePanelLayout.defaultProps = {
+  wrapperClasses: "",
+};
 
 export default SidePanelLayout;

@@ -1,20 +1,13 @@
 import { HTMLAttributes } from "react";
 import { animated, useSpring, config } from "react-spring"; // use to function to combine value
 
-const defaultProps = {
-  wrapperClasses: "",
-  spanClasses: "",
-  isOpen: false,
-  spanHeight: 4,
-};
-
 type BurgerLogoProps = {
   height: number;
   wrapperClasses?: HTMLAttributes<HTMLDivElement>["className"];
   spanClasses?: HTMLAttributes<HTMLDivElement>["className"];
   isOpen?: boolean;
   spanHeight?: number;
-} & typeof defaultProps;
+};
 
 const BurgerLogo = ({
   height,
@@ -103,6 +96,11 @@ const BurgerLogo = ({
   );
 };
 
-BurgerLogo.defaultProps = defaultProps;
+BurgerLogo.defaultProps = {
+  wrapperClasses: "",
+  spanClasses: "",
+  isOpen: false,
+  spanHeight: 4,
+};
 
 export default BurgerLogo;
