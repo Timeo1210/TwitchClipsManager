@@ -6,10 +6,10 @@ type SearchInputProps = {
   handleInputChange?: React.ChangeEventHandler<HTMLInputElement>;
 };
 
-const SearchInput: React.FC<SearchInputProps> = ({
+const SearchInput = ({
   showQueryResponse,
   handleInputChange,
-}) => (
+}: SearchInputProps): JSX.Element => (
   <div
     onFocus={showQueryResponse}
     className="flex flex-row w-full relative z-20 p-2"
@@ -27,5 +27,10 @@ const SearchInput: React.FC<SearchInputProps> = ({
     </button>
   </div>
 );
+
+SearchInput.defaultProps = {
+  showQueryResponse: () => {},
+  handleInputChange: () => {},
+};
 
 export default SearchInput;
