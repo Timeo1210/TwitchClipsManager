@@ -1,0 +1,8 @@
+query Channel($id: String!) {
+  get(id: $id) {
+    id
+    display_name
+    profile_image_url
+    view_count
+  }
+}

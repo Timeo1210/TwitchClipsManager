@@ -1,28 +1,9 @@
 import { useQuery, UseQueryOptions } from 'react-query';
+import { customFetcher } from '@/utils/graphqlFetcher';
 export type Maybe<T> = T | null;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
 export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
 export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
-
-function fetcher<TData, TVariables>(query: string, variables?: TVariables) {
-  return async (): Promise<TData> => {
-    const res = await fetch(process.env.NEXT_PUBLIC_API_URL as string, {
-      method: "POST",
-      headers: {"Content-Type":"application/json"},
-      body: JSON.stringify({ query, variables }),
-    });
-    
-    const json = await res.json();
-
-    if (json.errors) {
-      const { message } = json.errors[0];
-
-      throw new Error(message);
-    }
-
-    return json.data;
-  }
-}
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
   ID: string;
@@ -32,10 +13,25 @@ export type Scalars = {
   Float: number;
 };
 
+export type Channel = {
+  __typename?: 'Channel';
+  broadcaster_type: Scalars['String'];
+  description: Scalars['String'];
+  display_name: Scalars['String'];
+  id: Scalars['String'];
+  login: Scalars['String'];
+  offline_image_url: Scalars['String'];
+  profile_image_url: Scalars['String'];
+  type: Scalars['String'];
+  view_count: Scalars['Int'];
+  created_at: Scalars['Float'];
+};
+
 export type Query = {
   __typename?: 'Query';
   hello: Scalars['String'];
   search: Array<SearchChannels>;
+  get: Channel;
 };
 
 
@@ -44,6 +40,11 @@ export type QuerySearchArgs = {
   first?: Maybe<Scalars['Int']>;
   after?: Maybe<Scalars['String']>;
   live_only?: Maybe<Scalars['Boolean']>;
+};
+
+
+export type QueryGetArgs = {
+  id: Scalars['String'];
 };
 
 export type SearchChannels = {
@@ -60,6 +61,19 @@ export type SearchChannels = {
   title: Scalars['String'];
   started_at: Scalars['String'];
 };
+
+export type ChannelQueryVariables = Exact<{
+  id: Scalars['String'];
+}>;
+
+
+export type ChannelQuery = (
+  { __typename?: 'Query' }
+  & { get: (
+    { __typename?: 'Channel' }
+    & Pick<Channel, 'id' | 'display_name' | 'profile_image_url' | 'view_count'>
+  ) }
+);
 
 export type HelloQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -86,6 +100,28 @@ export type SearchChannelsQuery = (
 );
 
 
+export const ChannelDocument = `
+    query Channel($id: String!) {
+  get(id: $id) {
+    id
+    display_name
+    profile_image_url
+    view_count
+  }
+}
+    `;
+export const useChannelQuery = <
+      TData = ChannelQuery,
+      TError = unknown
+    >(
+      variables: ChannelQueryVariables, 
+      options?: UseQueryOptions<ChannelQuery, TError, TData>
+    ) => 
+    useQuery<ChannelQuery, TError, TData>(
+      ['Channel', variables],
+      customFetcher<ChannelQuery, ChannelQueryVariables>(ChannelDocument, variables),
+      options
+    );
 export const HelloDocument = `
     query Hello {
   hello
@@ -100,7 +136,7 @@ export const useHelloQuery = <
     ) => 
     useQuery<HelloQuery, TError, TData>(
       ['Hello', variables],
-      fetcher<HelloQuery, HelloQueryVariables>(HelloDocument, variables),
+      customFetcher<HelloQuery, HelloQueryVariables>(HelloDocument, variables),
       options
     );
 export const SearchChannelsDocument = `
@@ -121,6 +157,6 @@ export const useSearchChannelsQuery = <
     ) => 
     useQuery<SearchChannelsQuery, TError, TData>(
       ['SearchChannels', variables],
-      fetcher<SearchChannelsQuery, SearchChannelsQueryVariables>(SearchChannelsDocument, variables),
+      customFetcher<SearchChannelsQuery, SearchChannelsQueryVariables>(SearchChannelsDocument, variables),
       options
     );
