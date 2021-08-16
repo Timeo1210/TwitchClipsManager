@@ -5,6 +5,10 @@ import {
   SearchChannelsOutput,
 } from "./interfaces/SearchChannels.interface";
 import { GetUserInput, GetUserOutput } from "./interfaces/GetUser.interface";
+import {
+  GetVideosInput,
+  GetVideosOutput,
+} from "./interfaces/GetVideos.interface";
 
 interface ClientInterface {
   id: string;
@@ -87,5 +91,14 @@ export class TwitchApi {
       params: input,
     } as AxiosRequestConfig;
     return (await this.makeRequest(config)).data as GetUserOutput[];
+  }
+
+  public async getVideos(input: GetVideosInput): Promise<GetVideosOutput> {
+    const config = {
+      method: "GET",
+      url: "/videos",
+      params: input,
+    } as AxiosRequestConfig;
+    return (await this.makeRequest(config)) as GetVideosOutput;
   }
 }

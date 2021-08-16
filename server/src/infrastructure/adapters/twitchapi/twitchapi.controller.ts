@@ -5,6 +5,10 @@ import {
   SearchChannelsOutput,
 } from "./interfaces/SearchChannels.interface";
 import { GetUserInput, GetUserOutput } from "./interfaces/GetUser.interface";
+import {
+  GetVideosInput,
+  GetVideosOutput,
+} from "./interfaces/GetVideos.interface";
 
 const { API, Validators } = TwitchApiAdapter;
 // no direct expoprt
@@ -27,7 +31,19 @@ const getUser = async (input: GetUserInput): Promise<GetUserOutput | null> => {
   return null;
 };
 
+const getVideos = async (
+  input: GetVideosInput
+): Promise<GetVideosOutput | null> => {
+  try {
+    const data = await API.getVideos(input);
+    return data;
+  } catch {
+    return null;
+  }
+};
+
 export const twitchapiController = {
   searchChannels,
   getUser,
+  getVideos,
 };
