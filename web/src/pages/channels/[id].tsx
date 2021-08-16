@@ -19,9 +19,7 @@ const Channel = ({
     wrapperClasses="bg-gray-900"
     menu={<Burger channel={channel} />}
   >
-    <div className="w-full h-screen bg-gray-900">
-      <ToolsLayout />
-    </div>
+    <ToolsLayout />
   </SidePanelLayout>
 );
 

@@ -1,18 +1,17 @@
 import { useContext } from "react";
 import { ToolContext } from "@/contexts/ToolContext";
 import { Tools } from "@/utils/toolReducer";
+import VODsTool from "./VODs";
 
 const ToolsLayout = (): JSX.Element => {
   const toolContext = useContext(ToolContext);
 
-  switch (toolContext.tool.current) {
-    case Tools.VODs:
-      return <>VODs</>;
-    case Tools.Clips:
-      return <>Clips</>;
-    default:
-      return <span>Outil Introuvable !</span>;
-  }
+  return (
+    <div className="w-full h-screen bg-gray-900">
+      {toolContext.tool.current === Tools.VODs && <VODsTool />}
+      {toolContext.tool.current === Tools.Clips && <span>Clips</span>}
+    </div>
+  );
 };
 
 export default ToolsLayout;
