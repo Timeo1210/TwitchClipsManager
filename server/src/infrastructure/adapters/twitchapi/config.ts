@@ -13,12 +13,12 @@ const ajv = new Ajv();
 
 export const TwitchApiAdapter = {
   API: new TwitchApi({
-    id: "ks25p0pww0j1572hyrv9wdb9tz4hn9",
-    secret: "zcah9fiy0jmo9kbpwz0g9gl7rsn3pw",
+    id: process.env.TWITCHAPI_CLIENT || "",
+    secret: process.env.TWITCHAPI_SECRET || "",
   }),
   refreshSetup: async (): Promise<number> => TwitchApiAdapter.API.setup(),
   run: async (): Promise<void> => {
-    if (process.env.ENABLE_TWITCHAPI === "true") {
+    if (process.env.TWITCHAPI_ENABLE === "true") {
       await TwitchApiAdapter.refreshSetup();
     }
     // const nextSetupTime = 250;
