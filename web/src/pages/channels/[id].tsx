@@ -1,6 +1,7 @@
 import { GetServerSidePropsContext, InferGetServerSidePropsType } from "next";
 import { ParsedUrlQuery } from "querystring";
 import { ChannelDocument, ChannelQuery, ChannelQueryVariables } from "@/API";
+import { ChannelProvider } from "@/contexts/ChannelContext";
 import { ToolProvider } from "@/contexts/ToolContext";
 import SidePanelLayout from "@/components/SidePanelLayout";
 import Burger from "@/components/Burger";
@@ -11,14 +12,8 @@ interface IParams extends ParsedUrlQuery {
   id: string;
 }
 
-const Channel = ({
-  channel,
-}: InferGetServerSidePropsType<typeof getServerSideProps>): JSX.Element => (
-  <SidePanelLayout
-    width={200}
-    wrapperClasses="bg-gray-900"
-    menu={<Burger channel={channel} />}
-  >
+const Channel = (): JSX.Element => (
+  <SidePanelLayout width={200} wrapperClasses="bg-gray-900" menu={<Burger />}>
     <ToolsLayout />
   </SidePanelLayout>
 );
@@ -26,9 +21,11 @@ const Channel = ({
 const ChannelWrapper = ({
   channel,
 }: InferGetServerSidePropsType<typeof getServerSideProps>): JSX.Element => (
-  <ToolProvider>
-    <Channel channel={channel} />
-  </ToolProvider>
+  <ChannelProvider channel={channel}>
+    <ToolProvider>
+      <Channel />
+    </ToolProvider>
+  </ChannelProvider>
 );
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
