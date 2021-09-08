@@ -1,16 +1,7 @@
+import { ChannelEntity } from "@/core/entity/Channel.entity";
+
 export interface GetUserInput {
   id: string;
 }
 
-export interface GetUserOutput {
-  broadcaster_type: "parter" | "affiliate" | "";
-  description: string;
-  display_name: string;
-  id: string;
-  login: string;
-  offline_image_url: string;
-  profile_image_url: string;
-  type: "staff" | "admin" | "global_mod" | "";
-  view_count: number;
-  created_at: string;
-}
+export type GetUserOutput = ChannelEntity;
