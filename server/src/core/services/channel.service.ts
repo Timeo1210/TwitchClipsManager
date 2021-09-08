@@ -4,7 +4,7 @@ import {
   ChannelSearchQueryResponse,
   ChannelGetQueryInput,
   ChannelGetQueryResponse,
-} from "@/core/queries/channel.query";
+} from "@/core/queries/Channel.query";
 
 const search = async (
   input: ChannelSearchQueryInput
