@@ -5,10 +5,12 @@ import {
   SearchChannelsOutput,
 } from "./interfaces/SearchChannels.interface";
 import { GetUserInput, GetUserOutput } from "./interfaces/GetUser.interface";
+import { GetVideosInput } from "./interfaces/GetVideos.interface";
+import { GetVideosApiOutput } from "./interfaces/api/GetVideos.api.interface";
 import {
-  GetVideosInput,
-  GetVideosOutput,
-} from "./interfaces/GetVideos.interface";
+  GetStreamsApiInput,
+  GetStreamsApiOutput,
+} from "./interfaces/api/GetStreams.api.interface";
 
 interface ClientInterface {
   id: string;
@@ -93,12 +95,23 @@ export class TwitchApi {
     return (await this.makeRequest(config)).data as GetUserOutput[];
   }
 
-  public async getVideos(input: GetVideosInput): Promise<GetVideosOutput> {
+  public async getVideos(input: GetVideosInput): Promise<GetVideosApiOutput> {
     const config = {
       method: "GET",
       url: "/videos",
       params: input,
     } as AxiosRequestConfig;
-    return (await this.makeRequest(config)) as GetVideosOutput;
+    return (await this.makeRequest(config)) as GetVideosApiOutput;
+  }
+
+  public async getStreams(
+    input: GetStreamsApiInput
+  ): Promise<GetStreamsApiOutput> {
+    const config = {
+      method: "GET",
+      url: "/streams",
+      params: input,
+    } as AxiosRequestConfig;
+    return (await this.makeRequest(config)) as GetStreamsApiOutput;
   }
 }

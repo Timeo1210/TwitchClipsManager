@@ -2,7 +2,7 @@ import { twitchapiPort } from "@/core/ports/twitchapi.port";
 import {
   VideoGetByUserQueryInput,
   VideoGetByUserQueryOutput,
-} from "@/core/queries/video.query";
+} from "@/core/queries/Video.query";
 
 const getByUser = async (
   input: VideoGetByUserQueryInput

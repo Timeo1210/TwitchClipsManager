@@ -35,8 +35,19 @@ const getVideos = async (
   input: GetVideosInput
 ): Promise<GetVideosOutput | null> => {
   try {
-    const data = await API.getVideos(input);
-    return data;
+    console.log(input);
+    const isBroadcasterStreaming =
+      (await API.getStreams({ user_id: input.user_id })).data.length !== 0; // get broadcaster stream to remove unused video
+
+    const data = await API.getVideos({
+      ...input,
+      first: isBroadcasterStreaming
+        ? (parseInt(input.first || "20", 10) + 1).toString()
+        : input.first,
+    });
+
+    if (isBroadcasterStreaming) data.data.shift();
+    return { videos: data.data, pagination: data.pagination };
   } catch {
     return null;
   }

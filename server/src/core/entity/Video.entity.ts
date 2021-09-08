@@ -1,14 +1,4 @@
-export interface VideoGetByUserQueryInput {
-  user_id: string;
-  after?: string;
-  before?: string;
-  first?: string;
-  period?: "all" | "month" | "week" | "day";
-  sort?: "time" | "trending" | "views";
-  type?: "all" | "upload" | "archive" | "highlight";
-}
-
-interface VideoObject {
+export interface VideoObject {
   id: string;
   stream_id: string;
   user_id: string;
@@ -26,11 +16,4 @@ interface VideoObject {
   type: "upload" | "archive" | "highlight";
   duration: string;
   muted_segments: { duration: number; offset: number } | null;
-}
-
-export interface VideoGetByUserQueryOutput {
-  data: VideoObject[];
-  pagination: {
-    cursor: string;
-  };
 }

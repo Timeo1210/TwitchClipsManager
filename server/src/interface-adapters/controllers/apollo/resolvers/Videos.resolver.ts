@@ -8,16 +8,12 @@ import { Videos } from "../ObjectTypes/Videos.objectType";
 import { GetByUserVideoArgs } from "../ArgsTypes/Video.argsType";
 
 @Resolver(Videos)
-export class VideoResolver {
+export class VideosResolver {
   @Query(() => Videos)
   async getByUser(@Args() request: GetByUserVideoArgs) {
     try {
       const response = await VideoService.getByUser(request);
-      if (response)
-        return {
-          videos: response.data,
-          pagination: response.pagination,
-        };
+      if (response) return response;
     } catch {
       throw new Error("Internal Server Error !");
     }
