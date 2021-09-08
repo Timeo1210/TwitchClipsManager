@@ -1,4 +1,4 @@
-export interface VideoObject {
+export interface VideoEntity {
   id: string;
   stream_id: string;
   user_id: string;

@@ -1,4 +1,4 @@
-import { VideoObject } from "@/core/entity/Video.entity";
+import { VideoEntity } from "@/core/entity/Video.entity";
 
 export interface VideoGetByUserQueryInput {
   user_id: string;
@@ -11,7 +11,7 @@ export interface VideoGetByUserQueryInput {
 }
 
 export interface VideoGetByUserQueryOutput {
-  videos: VideoObject[];
+  videos: VideoEntity[];
   pagination: {
     cursor: string;
   };
