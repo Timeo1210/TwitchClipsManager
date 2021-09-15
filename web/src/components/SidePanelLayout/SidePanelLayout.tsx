@@ -35,7 +35,7 @@ const SidePanelLayout = ({
   });
 
   return (
-    <div className={`flex justify-start h-screen ${wrapperClasses}`}>
+    <div className={`flex justify-start h-full ${wrapperClasses}`}>
       <div
         style={{ width: "12vw", maxWidth: "50px" }}
         className="z-30 box-border bg-gray-800 bg-opacity-50 border-r-2 border-purple-900"
