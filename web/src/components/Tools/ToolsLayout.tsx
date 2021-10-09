@@ -7,7 +7,7 @@ const ToolsLayout = (): JSX.Element => {
   const toolContext = useContext(ToolContext);
 
   return (
-    <div className="w-full h-full bg-gray-900">
+    <div className="bg-gray-900">
       {toolContext.tool.current === Tools.VODs && <VODsTool />}
       {toolContext.tool.current === Tools.Clips && <span>Clips</span>}
     </div>

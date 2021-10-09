@@ -7,8 +7,8 @@ import BurgerButton from "./BurgerButton";
 const Burger = (): JSX.Element => {
   const channelContext = useContext(ChannelContext);
   return (
-    <div style={{ minWidth: "200px" }}>
-      <div className="h-screen flex flex-col items-center bg-gray-800 bg-opacity-50 shadow text-lg">
+    <div style={{ minWidth: "200px" }} className="h-full">
+      <div className="flex flex-col items-center bg-gray-800 bg-opacity-50 shadow text-lg h-full">
         <div className="w-full flex flex-col items-center px-8 pt-8 pb-6 border-r-2 border-b-2 border-purple-900">
           <figure
             aria-label={channelContext.display_name}
@@ -26,7 +26,7 @@ const Burger = (): JSX.Element => {
           <BurgerButton tool={Tools.VODs} />
           <BurgerButton tool={Tools.Clips} />
         </div>
-        <div className="w-full h-full border-r-2 border-purple-900" />
+        <div className="w-full border-r-2 border-purple-900 flex-grow" />
       </div>
     </div>
   );

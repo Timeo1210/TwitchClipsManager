@@ -37,26 +37,26 @@ const SidePanelLayout = ({
   return (
     <div className={`flex justify-start h-full ${wrapperClasses}`}>
       <div
-        style={{ width: "12vw", maxWidth: "50px" }}
+        style={{ width: "20vw", maxWidth: "50px" }}
         className="z-30 box-border bg-gray-800 bg-opacity-50 border-r-2 border-purple-900"
       >
         <button
           type="button"
           onClick={() => setOpen(!open)}
           style={{ outline: "none" }}
-          className="w-full p-2"
+          className="w-full p-1 sm:p-2"
         >
           <BurgerLogo height={20} isOpen={open} spanClasses="bg-purple-800" />
         </button>
       </div>
-      <div className="relative flex-grow">
+      <div className="relative flex-grow h-full">
         <div className="absolute top-0 left-0 h-full visible">{menu}</div>
         <animated.div
           style={{
             transform: mainOffset.to((o) => `translateX(${o}px)`),
             overflowX: "hidden",
           }}
-          className="relative left-0 z-40"
+          className="relative left-0 z-40 h-full bg-gray-900"
         >
           {children}
         </animated.div>
