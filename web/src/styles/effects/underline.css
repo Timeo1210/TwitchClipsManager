@@ -1,0 +1,10 @@
+.underline-effect {
+  background-image: linear-gradient(transparent calc(100% - 2px), rgba(243, 244, 246) 4px);
+  background-repeat: no-repeat;
+  background-size: 0% 100%;
+  transition: background-size 1s;
+}
+
+.underline-effect:hover {
+  background-size: 100% 100%;
+}
