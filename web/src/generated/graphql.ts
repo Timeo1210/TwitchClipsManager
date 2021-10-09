@@ -27,11 +27,17 @@ export type Channel = {
   created_at: Scalars['Float'];
 };
 
+export type Pagination = {
+  __typename?: 'Pagination';
+  cursor?: Maybe<Scalars['String']>;
+};
+
 export type Query = {
   __typename?: 'Query';
   hello: Scalars['String'];
   search: Array<SearchChannels>;
   get: Channel;
+  getByUser: Videos;
 };
 
 
@@ -47,6 +53,17 @@ export type QueryGetArgs = {
   id: Scalars['String'];
 };
 
+
+export type QueryGetByUserArgs = {
+  user_id: Scalars['String'];
+  after?: Maybe<Scalars['String']>;
+  before?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['String']>;
+  period?: Maybe<Scalars['String']>;
+  sort?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
+};
+
 export type SearchChannels = {
   __typename?: 'SearchChannels';
   broadcaster_language: Scalars['String'];
@@ -60,6 +77,33 @@ export type SearchChannels = {
   thumbnail_url: Scalars['String'];
   title: Scalars['String'];
   started_at: Scalars['String'];
+};
+
+export type Video = {
+  __typename?: 'Video';
+  id: Scalars['String'];
+  stream_id: Scalars['String'];
+  user_id: Scalars['String'];
+  user_login: Scalars['String'];
+  user_name: Scalars['String'];
+  title: Scalars['String'];
+  description: Scalars['String'];
+  created_at: Scalars['String'];
+  published_at: Scalars['String'];
+  url: Scalars['String'];
+  thumbnail_url: Scalars['String'];
+  viewable: Scalars['String'];
+  view_count: Scalars['Float'];
+  language: Scalars['String'];
+  type: Scalars['String'];
+  duration: Scalars['String'];
+  muted_segments: Scalars['String'];
+};
+
+export type Videos = {
+  __typename?: 'Videos';
+  videos: Array<Video>;
+  pagination: Pagination;
 };
 
 export type ChannelQueryVariables = Exact<{
@@ -97,6 +141,31 @@ export type SearchChannelsQuery = (
     { __typename?: 'SearchChannels' }
     & Pick<SearchChannels, 'id' | 'display_name' | 'thumbnail_url'>
   )> }
+);
+
+export type VideosQueryVariables = Exact<{
+  user_id: Scalars['String'];
+  after?: Maybe<Scalars['String']>;
+  before?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['String']>;
+  period?: Maybe<Scalars['String']>;
+  sort?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
+}>;
+
+
+export type VideosQuery = (
+  { __typename?: 'Query' }
+  & { getByUser: (
+    { __typename?: 'Videos' }
+    & { videos: Array<(
+      { __typename?: 'Video' }
+      & Pick<Video, 'id' | 'title' | 'description' | 'created_at' | 'published_at' | 'url' | 'thumbnail_url' | 'viewable' | 'view_count' | 'duration'>
+    )>, pagination: (
+      { __typename?: 'Pagination' }
+      & Pick<Pagination, 'cursor'>
+    ) }
+  ) }
 );
 
 
@@ -158,5 +227,46 @@ export const useSearchChannelsQuery = <
     useQuery<SearchChannelsQuery, TError, TData>(
       ['SearchChannels', variables],
       customFetcher<SearchChannelsQuery, SearchChannelsQueryVariables>(SearchChannelsDocument, variables),
+      options
+    );
+export const VideosDocument = `
+    query Videos($user_id: String!, $after: String, $before: String, $first: String, $period: String, $sort: String, $type: String) {
+  getByUser(
+    user_id: $user_id
+    after: $after
+    before: $before
+    first: $first
+    period: $period
+    sort: $sort
+    type: $type
+  ) {
+    videos {
+      id
+      title
+      description
+      created_at
+      published_at
+      url
+      thumbnail_url
+      viewable
+      view_count
+      duration
+    }
+    pagination {
+      cursor
+    }
+  }
+}
+    `;
+export const useVideosQuery = <
+      TData = VideosQuery,
+      TError = unknown
+    >(
+      variables: VideosQueryVariables, 
+      options?: UseQueryOptions<VideosQuery, TError, TData>
+    ) => 
+    useQuery<VideosQuery, TError, TData>(
+      ['Videos', variables],
+      customFetcher<VideosQuery, VideosQueryVariables>(VideosDocument, variables),
       options
     );
