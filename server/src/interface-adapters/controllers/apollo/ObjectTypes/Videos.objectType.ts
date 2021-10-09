@@ -4,7 +4,7 @@ import { Video } from "./Video.objectType";
 
 @ObjectType()
 class Pagination {
-  @Field()
+  @Field({ nullable: true })
   cursor: String;
 }
 
