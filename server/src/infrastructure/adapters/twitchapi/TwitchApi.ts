@@ -11,6 +11,7 @@ import {
   GetStreamsApiInput,
   GetStreamsApiOutput,
 } from "./interfaces/api/GetStreams.api.interface";
+import { GetVideoInput } from "./interfaces/GetVideo.interface";
 
 interface ClientInterface {
   id: string;
@@ -95,7 +96,9 @@ export class TwitchApi {
     return (await this.makeRequest(config)).data as GetUserOutput[];
   }
 
-  public async getVideos(input: GetVideosInput): Promise<GetVideosApiOutput> {
+  public async getVideos(
+    input: GetVideosInput | GetVideoInput
+  ): Promise<GetVideosApiOutput> {
     const config = {
       method: "GET",
       url: "/videos",

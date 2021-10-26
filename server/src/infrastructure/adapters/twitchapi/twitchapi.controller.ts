@@ -9,6 +9,7 @@ import {
   GetVideosInput,
   GetVideosOutput,
 } from "./interfaces/GetVideos.interface";
+import { GetVideoInput, GetVideoOutput } from "./interfaces/GetVideo.interface";
 
 const { API, Validators } = TwitchApiAdapter;
 // no direct expoprt
@@ -53,8 +54,22 @@ const getVideos = async (
   }
 };
 
+const getVideo = async (
+  input: GetVideoInput
+): Promise<GetVideoOutput | null> => {
+  try {
+    console.log(input);
+    const { data } = await API.getVideos(input);
+    if (data.length >= 1) return data[0];
+    return null;
+  } catch {
+    return null;
+  }
+};
+
 export const twitchapiController = {
   searchChannels,
   getUser,
   getVideos,
+  getVideo,
 };

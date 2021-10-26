@@ -16,3 +16,9 @@ export interface VideoGetByUserQueryOutput {
     cursor: string;
   };
 }
+
+export interface VideoGetByIdQueryInput {
+  id: string;
+}
+
+export interface VideoGetByIdQueryOutput extends VideoEntity {}

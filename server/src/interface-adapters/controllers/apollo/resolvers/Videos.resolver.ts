@@ -5,12 +5,12 @@ import { UserInputError } from "apollo-server-core";
 import { VideoService } from "@/core/services/video.service";
 
 import { Videos } from "../ObjectTypes/Videos.objectType";
-import { GetByUserVideoArgs } from "../ArgsTypes/Video.argsType";
+import { GetByUserVideosArgs } from "../ArgsTypes/Videos.argsType";
 
 @Resolver(Videos)
 export class VideosResolver {
   @Query(() => Videos)
-  async getByUser(@Args() request: GetByUserVideoArgs) {
+  async getByUser(@Args() request: GetByUserVideosArgs) {
     try {
       const response = await VideoService.getByUser(request);
       if (response) return response;
