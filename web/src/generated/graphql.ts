@@ -38,6 +38,7 @@ export type Query = {
   search: Array<SearchChannels>;
   get: Channel;
   getByUser: Videos;
+  getById: Video;
 };
 
 
@@ -62,6 +63,11 @@ export type QueryGetByUserArgs = {
   period?: Maybe<Scalars['String']>;
   sort?: Maybe<Scalars['String']>;
   type?: Maybe<Scalars['String']>;
+};
+
+
+export type QueryGetByIdArgs = {
+  id: Scalars['String'];
 };
 
 export type SearchChannels = {
@@ -141,6 +147,19 @@ export type SearchChannelsQuery = (
     { __typename?: 'SearchChannels' }
     & Pick<SearchChannels, 'id' | 'display_name' | 'thumbnail_url'>
   )> }
+);
+
+export type VideoQueryVariables = Exact<{
+  id: Scalars['String'];
+}>;
+
+
+export type VideoQuery = (
+  { __typename?: 'Query' }
+  & { getById: (
+    { __typename?: 'Video' }
+    & Pick<Video, 'id' | 'user_name' | 'title' | 'description' | 'created_at' | 'published_at' | 'url' | 'thumbnail_url' | 'view_count' | 'duration'>
+  ) }
 );
 
 export type VideosQueryVariables = Exact<{
@@ -227,6 +246,34 @@ export const useSearchChannelsQuery = <
     useQuery<SearchChannelsQuery, TError, TData>(
       ['SearchChannels', variables],
       customFetcher<SearchChannelsQuery, SearchChannelsQueryVariables>(SearchChannelsDocument, variables),
+      options
+    );
+export const VideoDocument = `
+    query Video($id: String!) {
+  getById(id: $id) {
+    id
+    user_name
+    title
+    description
+    created_at
+    published_at
+    url
+    thumbnail_url
+    view_count
+    duration
+  }
+}
+    `;
+export const useVideoQuery = <
+      TData = VideoQuery,
+      TError = unknown
+    >(
+      variables: VideoQueryVariables, 
+      options?: UseQueryOptions<VideoQuery, TError, TData>
+    ) => 
+    useQuery<VideoQuery, TError, TData>(
+      ['Video', variables],
+      customFetcher<VideoQuery, VideoQueryVariables>(VideoDocument, variables),
       options
     );
 export const VideosDocument = `

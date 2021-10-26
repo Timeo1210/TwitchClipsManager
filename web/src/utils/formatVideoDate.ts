@@ -1,19 +1,22 @@
-const dayDurationInMs = 8.64e7;
 const currentDate = new Date();
-const yesterdayStartMs = currentDate.getTime() - 2 * dayDurationInMs;
-const yesterdayEndMs = currentDate.getTime() - dayDurationInMs;
 
-const formatVideoDate = (videoRawDate: string): string => {
+const formatDate = (videoDate: Date): string => {
+  if (currentDate.getDate() === videoDate.getDate()) return "aujourd'hui";
+  if (currentDate.getDate() - 1 === videoDate.getDate()) return "hier";
+  return `le ${videoDate.toLocaleDateString()}`;
+};
+
+const formatTime = (videoDate: Date): string =>
+  `à ${videoDate
+    .toLocaleTimeString("default", { hour: "2-digit", minute: "2-digit" })
+    .replace(":", "h")}`;
+
+const formatVideoDate = (videoRawDate: string, showTime = false): string => {
   const videoDate = new Date(videoRawDate);
   if (Number.isNaN(videoDate.getTime())) return "";
-  if (yesterdayEndMs <= videoDate.getTime()) return "aujourd'hui";
-  if (
-    yesterdayStartMs <= videoDate.getTime() &&
-    videoDate.getTime() <= yesterdayEndMs
-  ) {
-    return "hier";
-  }
-  return `le ${videoDate.toLocaleDateString()}`;
+  return `
+  ${formatDate(videoDate)}
+  ${showTime ? formatTime(videoDate) : ""}`.trim();
 };
 
 export default formatVideoDate;
