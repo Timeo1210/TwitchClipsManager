@@ -1,12 +1,7 @@
 /* eslint-disable max-classes-per-file */
 import { Field, ObjectType } from "type-graphql";
+import { Pagination } from "./Pagination.objectType";
 import { Video } from "./Video.objectType";
-
-@ObjectType()
-class Pagination {
-  @Field({ nullable: true })
-  cursor: String;
-}
 
 @ObjectType()
 export class Videos {
