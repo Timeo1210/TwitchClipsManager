@@ -12,6 +12,10 @@ import {
   GetStreamsApiOutput,
 } from "./interfaces/api/GetStreams.api.interface";
 import { GetVideoInput } from "./interfaces/GetVideo.interface";
+import {
+  GetClipsApiInput,
+  GetClipsApiOutput,
+} from "./interfaces/api/GetClips.api.interface";
 
 interface ClientInterface {
   id: string;
@@ -116,5 +120,14 @@ export class TwitchApi {
       params: input,
     } as AxiosRequestConfig;
     return (await this.makeRequest(config)) as GetStreamsApiOutput;
+  }
+
+  public async getClips(input: GetClipsApiInput): Promise<GetClipsApiOutput> {
+    const config = {
+      method: "GET",
+      url: "/clips",
+      params: input,
+    } as AxiosRequestConfig;
+    return (await this.makeRequest(config)) as GetClipsApiOutput;
   }
 }

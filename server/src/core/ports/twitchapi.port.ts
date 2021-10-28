@@ -16,6 +16,10 @@ import {
   GetVideoInput,
   GetVideoOutput,
 } from "@/infrastructure/adapters/twitchapi/interfaces/GetVideo.interface";
+import {
+  GetClipsInput,
+  GetClipsOutput,
+} from "@/infrastructure/adapters/twitchapi/interfaces/GetClips.interface";
 
 const searchChannels = async (
   query: SearchChannelsInput
@@ -31,9 +35,13 @@ const getVideos = async (
 const getVideo = async (query: GetVideoInput): Promise<GetVideoOutput | null> =>
   twitchapiController.getVideo(query);
 
+const getClips = async (query: GetClipsInput): Promise<GetClipsOutput | null> =>
+  twitchapiController.getClips(query);
+
 export const twitchapiPort = {
   searchChannels,
   getUser,
   getVideos,
   getVideo,
+  getClips,
 };

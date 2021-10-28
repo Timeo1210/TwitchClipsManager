@@ -12,6 +12,7 @@ import { SearchChannelsResolver } from "./resolvers/searchChannels.resolver";
 import { ChannelResolver } from "./resolvers/Channel.resolver";
 import { VideosResolver } from "./resolvers/Videos.resolver";
 import { VideoResolver } from "./resolvers/Video.resolver";
+import { ClipsResolver } from "./resolvers/Clips.resolver";
 
 export const apolloController = {
   run: async () => {
@@ -28,6 +29,7 @@ export const apolloController = {
           ChannelResolver,
           VideosResolver,
           VideoResolver,
+          ClipsResolver,
         ],
       }),
     });
