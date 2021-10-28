@@ -1,6 +1,7 @@
 query Video($id: String!) {
   getById(id: $id) {
     id
+    user_id
     user_name
     title
     description

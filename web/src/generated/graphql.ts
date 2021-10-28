@@ -27,6 +27,31 @@ export type Channel = {
   created_at: Scalars['Float'];
 };
 
+export type Clip = {
+  __typename?: 'Clip';
+  id: Scalars['String'];
+  url: Scalars['String'];
+  embed_url: Scalars['String'];
+  broadcaster_id: Scalars['String'];
+  broadcaster_name: Scalars['String'];
+  creator_id: Scalars['String'];
+  creator_name: Scalars['String'];
+  video_id: Scalars['String'];
+  game_id: Scalars['String'];
+  language: Scalars['String'];
+  title: Scalars['String'];
+  view_count: Scalars['Float'];
+  created_at: Scalars['String'];
+  thumbnail_url: Scalars['String'];
+  duration: Scalars['Float'];
+};
+
+export type Clips = {
+  __typename?: 'Clips';
+  clips: Array<Clip>;
+  pagination: Pagination;
+};
+
 export type Pagination = {
   __typename?: 'Pagination';
   cursor?: Maybe<Scalars['String']>;
@@ -39,6 +64,7 @@ export type Query = {
   get: Channel;
   getByUser: Videos;
   getById: Video;
+  getByBroadcasterId: Clips;
 };
 
 
@@ -68,6 +94,16 @@ export type QueryGetByUserArgs = {
 
 export type QueryGetByIdArgs = {
   id: Scalars['String'];
+};
+
+
+export type QueryGetByBroadcasterIdArgs = {
+  broadcaster_id: Scalars['String'];
+  after?: Maybe<Scalars['String']>;
+  before?: Maybe<Scalars['String']>;
+  ended_at?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Float']>;
+  started_at?: Maybe<Scalars['String']>;
 };
 
 export type SearchChannels = {
@@ -125,6 +161,30 @@ export type ChannelQuery = (
   ) }
 );
 
+export type ClipsQueryVariables = Exact<{
+  broadcaster_id: Scalars['String'];
+  after?: Maybe<Scalars['String']>;
+  before?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Float']>;
+  started_at?: Maybe<Scalars['String']>;
+  ended_at?: Maybe<Scalars['String']>;
+}>;
+
+
+export type ClipsQuery = (
+  { __typename?: 'Query' }
+  & { getByBroadcasterId: (
+    { __typename?: 'Clips' }
+    & { clips: Array<(
+      { __typename?: 'Clip' }
+      & Pick<Clip, 'id' | 'url' | 'title' | 'view_count' | 'created_at' | 'thumbnail_url' | 'duration'>
+    )>, pagination: (
+      { __typename?: 'Pagination' }
+      & Pick<Pagination, 'cursor'>
+    ) }
+  ) }
+);
+
 export type HelloQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -158,7 +218,7 @@ export type VideoQuery = (
   { __typename?: 'Query' }
   & { getById: (
     { __typename?: 'Video' }
-    & Pick<Video, 'id' | 'user_name' | 'title' | 'description' | 'created_at' | 'published_at' | 'url' | 'thumbnail_url' | 'view_count' | 'duration'>
+    & Pick<Video, 'id' | 'user_id' | 'user_name' | 'title' | 'description' | 'created_at' | 'published_at' | 'url' | 'thumbnail_url' | 'view_count' | 'duration'>
   ) }
 );
 
@@ -210,6 +270,43 @@ export const useChannelQuery = <
       customFetcher<ChannelQuery, ChannelQueryVariables>(ChannelDocument, variables),
       options
     );
+export const ClipsDocument = `
+    query Clips($broadcaster_id: String!, $after: String, $before: String, $first: Float, $started_at: String, $ended_at: String) {
+  getByBroadcasterId(
+    broadcaster_id: $broadcaster_id
+    after: $after
+    before: $before
+    first: $first
+    started_at: $started_at
+    ended_at: $ended_at
+  ) {
+    clips {
+      id
+      url
+      title
+      view_count
+      created_at
+      thumbnail_url
+      duration
+    }
+    pagination {
+      cursor
+    }
+  }
+}
+    `;
+export const useClipsQuery = <
+      TData = ClipsQuery,
+      TError = unknown
+    >(
+      variables: ClipsQueryVariables, 
+      options?: UseQueryOptions<ClipsQuery, TError, TData>
+    ) => 
+    useQuery<ClipsQuery, TError, TData>(
+      ['Clips', variables],
+      customFetcher<ClipsQuery, ClipsQueryVariables>(ClipsDocument, variables),
+      options
+    );
 export const HelloDocument = `
     query Hello {
   hello
@@ -252,6 +349,7 @@ export const VideoDocument = `
     query Video($id: String!) {
   getById(id: $id) {
     id
+    user_id
     user_name
     title
     description

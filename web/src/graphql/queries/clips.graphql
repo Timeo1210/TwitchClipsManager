@@ -1,0 +1,16 @@
+query Clips($broadcaster_id: String!, $after: String, $before: String, $first: Float, $started_at: String, $ended_at: String) {
+  getByBroadcasterId(broadcaster_id: $broadcaster_id, after: $after, before: $before, first: $first, started_at: $started_at, ended_at: $ended_at) {
+    clips {
+      id
+      url
+      title
+      view_count
+      created_at
+      thumbnail_url
+      duration
+    }
+    pagination {
+      cursor
+    }
+  }
+}

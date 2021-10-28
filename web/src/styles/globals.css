@@ -2,6 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 @import "./effects/underline.css";
+@import "./scrollbar.css";
 
 @layer base {
   @font-face {
