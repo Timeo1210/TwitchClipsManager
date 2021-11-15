@@ -1,4 +1,6 @@
+import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { ClipsQuery } from "@/API";
 import { useVideoContext } from "@/contexts/VideoContext";
 import HoverEffectWrapper from "@/components/HoverEffectWrapper/HoverEffectWrapper";
@@ -12,10 +14,11 @@ import getVideoClipCreateUrl from "@/utils/getVideoClipCreateUrl";
 
 type ClipItemProps = {
   clip: UnpackedArray<ClipsQuery["getByBroadcasterId"]["clips"]>;
+  style?: React.CSSProperties;
 };
 
-const ClipItem = ({ clip }: ClipItemProps): JSX.Element => {
-  const clipThumbnailUrl = formatThumbnailUrl(clip.thumbnail_url);
+const ClipItem = ({ clip, style = {} }: ClipItemProps): JSX.Element => {
+  const clipThumbnailUrl = formatThumbnailUrl(clip.thumbnail_url, 170, 98); // This is more or less useless
   const videoContext = useVideoContext();
 
   const twitchOffset = 1.5 * clip.duration * 1000; // Offset for better accuracy no logic here
@@ -30,17 +33,21 @@ const ClipItem = ({ clip }: ClipItemProps): JSX.Element => {
   );
 
   return (
-    <div className="flex p-2">
-      <div style={{ maxWidth: "150px", minWidth: "150px" }} className="w-full">
+    <div className="flex p-1" style={style}>
+      <div
+        style={{ maxHeight: "95px", maxWidth: "170px" }}
+        className="w-full m-auto"
+      >
         <HoverEffectWrapper>
           <Link href={clip.url}>
-            <a target="_blank">
+            <a target="_blank" rel="nofollow noopener noreferrer">
               <div className="w-full relative border-2 rounded border-purple-900">
-                <img
+                <Image
                   src={clipThumbnailUrl}
-                  className="rounded"
+                  className="rounded object-cover"
                   alt="thumbnail"
-                  width="150px"
+                  width="170px"
+                  height="95px"
                 />
               </div>
             </a>
@@ -50,14 +57,16 @@ const ClipItem = ({ clip }: ClipItemProps): JSX.Element => {
       <div className="flex flex-col justify-between items-start pl-3 w-full text-left">
         <Link href={`/clips/${clip.id}`}>
           <a target="_blank" className="line-clamp-2">
-            <h3 className="inline text-lg underline-effect">{clip.title}</h3>
+            <h2 className="inline text-lg underline-effect leading-4">
+              {clip.title}
+            </h2>
           </a>
         </Link>
         <span className="text-gray-300">
           Nombre de vues : {clip.view_count}
         </span>
         <Link href={videoClipCreateUrl}>
-          <a target="_blank">
+          <a target="_blank" rel="nofollow noopener noreferrer">
             <span className="text-gray-300 underline-effect">
               Crée après : {relativeRawElpasedTime} ({Math.round(clip.duration)}
               s)
@@ -68,6 +77,10 @@ const ClipItem = ({ clip }: ClipItemProps): JSX.Element => {
       <DownloadButton href={downloadUrl} className="m-3" />
     </div>
   );
+};
+
+ClipItem.defaultProps = {
+  style: {},
 };
 
 export default ClipItem;

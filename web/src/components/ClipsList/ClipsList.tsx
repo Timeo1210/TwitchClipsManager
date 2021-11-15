@@ -1,15 +1,26 @@
 import { useContext } from "react";
+import { FixedSizeList as List, ListChildComponentProps } from "react-window";
+import AutoSizer from "react-virtualized-auto-sizer";
+import { ClipsQuery } from "@/API";
 import { ClipsContext } from "@/contexts/ClipsContext";
-import SortingButtons from "./SortingButtons/SortingButtons";
-import ClipItem from "./ClipItem/ClipItem";
+import SortingButtons from "./SortingButtons";
+import ClipItem from "./ClipItem";
+
+interface RowProps extends ListChildComponentProps {
+  data: ClipsQuery["getByBroadcasterId"]["clips"];
+}
+
+const Row = ({ index, style, data }: RowProps): JSX.Element => (
+  <ClipItem clip={data[index]} style={style} />
+);
 
 const ClipsList = (): JSX.Element => {
   const clipsContext = useContext(ClipsContext);
 
   return (
     <div
-      style={{ maxWidth: "1000px", maxHeight: "400px", minHeight: "50%" }}
-      className="flex flex-col overflow-y-auto overflow-x-hidden w-full"
+      style={{ maxWidth: "1000px", minHeight: "400px", height: "100%" }}
+      className="flex flex-col overflow-y-hidden overflow-x-hidden w-full"
     >
       <div className="ml-2 mb-2 flex items-center">
         <span>Trier par : </span>
@@ -19,11 +30,20 @@ const ClipsList = (): JSX.Element => {
           (par défaut les clips sont trier par vues)
         </span>
       </div>
-      <div className="w-full h-full overflow-y-auto custom-scrollbar">
-        {clipsContext.clips.map((value) => (
-          <ClipItem key={value.id} clip={value} />
-        ))}
-      </div>
+      <AutoSizer disableWidth>
+        {({ height }) => (
+          <List
+            className="custom-scrollbar"
+            height={height - 60} // check THIS
+            itemCount={clipsContext.clips.length}
+            itemSize={110}
+            width="100%"
+            itemData={clipsContext.clips}
+          >
+            {Row}
+          </List>
+        )}
+      </AutoSizer>
     </div>
   );
 };

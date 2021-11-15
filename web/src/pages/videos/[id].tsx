@@ -1,5 +1,6 @@
 import React from "react";
 import { GetServerSidePropsContext, InferGetServerSidePropsType } from "next";
+import Link from "next/link";
 import { ParsedUrlQuery } from "querystring";
 import {
   useClipsQuery,
@@ -14,6 +15,7 @@ import VideoDetails from "@/components/VideoDetails";
 import ClipsList from "@/components/ClipsList";
 import getVideoRawEndDate from "@/utils/getVideoRawEndDate";
 import LoadingIcon from "@/components/LoadingIcon/LoadingIcon";
+import VideoTimeline from "@/components/VideoTimeline";
 
 interface IParams extends ParsedUrlQuery {
   id: string;
@@ -49,18 +51,17 @@ const Video = ({
         }}
       >
         <div className="bg-gray-900 flex flex-col items-center h-full p-2 overflow-y-scroll">
-          <h1 className="text-6xl my-4">{video.user_name}</h1>
+          <Link href={`/channels/${video.user_id}`}>
+            <a>
+              <h1 className="text-6xl my-4 underline-effect">
+                {video.user_name}
+              </h1>
+            </a>
+          </Link>
           <VideoDetails video={video} />
           {data !== undefined && data?.getByBroadcasterId.clips.length >= 1 && (
             <>
-              <div
-                style={{
-                  maxWidth: "1000px",
-                  height: "150px",
-                  minHeight: "150px",
-                }}
-                className="w-full border my-5"
-              />
+              <VideoTimeline />
               <ClipsList />
             </>
           )}
