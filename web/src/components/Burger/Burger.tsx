@@ -1,4 +1,5 @@
 import { useContext } from "react";
+import Image from "next/image";
 import { ChannelContext } from "@/contexts/ChannelContext";
 import formatViewCount from "@/utils/formatViewCount";
 import { Tools } from "@/utils/toolReducer";
@@ -14,8 +15,10 @@ const Burger = (): JSX.Element => {
             aria-label={channelContext.display_name}
             className="w-32 h-32"
           >
-            <img
+            <Image
               src={channelContext.profile_image_url}
+              width={128}
+              height={128}
               alt={channelContext.display_name}
             />
           </figure>

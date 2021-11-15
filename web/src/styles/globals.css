@@ -10,11 +10,12 @@
     src: url("/fonts/Alata/Alata-Regular.ttf");
     font-weight: 400;
     font-style: normal;
+    font-display: swap;
   }
 }
 
 * {
-  font-family: "Alata";
+  font-family: "Alata", Arial, Helvetica, sans-serif;
   color: rgba(243, 244, 246); /* text-gray-100 */
 }
 

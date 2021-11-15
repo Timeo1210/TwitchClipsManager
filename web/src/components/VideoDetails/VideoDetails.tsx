@@ -1,12 +1,13 @@
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { VideoQuery } from "@/API";
 import { UnpackedArray } from "@/utils/UnpackedArray";
 import formatThumbnailUrl from "@/utils/formatThumbnailUrl";
 import formatVideoDate from "@/utils/formatVideoDate";
 import getVideoRawEndDate from "@/utils/getVideoRawEndDate";
 import ActionButton from "@/components/ActionButton";
-import HoverEffectWrapper from "../HoverEffectWrapper/HoverEffectWrapper";
+import HoverEffectWrapper from "../HoverEffectWrapper";
 import GridCell from "./GridCell";
 
 type VideoDetailsProps = {
@@ -30,20 +31,21 @@ const VideoDetails = ({ video }: VideoDetailsProps): JSX.Element => {
           style={{ flex: "0 1.5 550px" }}
           className="bg-gray-800 border-transparent bg-clip-padding border-2 flex flex-col items-center p-3"
         >
-          <h3 className="text-3xl my-3 text-center">{video.title}</h3>
+          <h1 className="text-3xl my-3 text-center">{video.title}</h1>
           <div
             style={{ maxWidth: "300px", minWidth: "300px" }}
             className="w-full mb-3"
           >
             <HoverEffectWrapper>
               <Link href={video.url}>
-                <a target="_blank">
+                <a target="_blank" rel="nofollow noopener noreferrer">
                   <div className="w-full relative border-2 rounded border-purple-900 ">
-                    <img
+                    <Image
                       src={videoThumbnailUrl}
                       className="rounded"
                       alt="thumbnail"
                       width="300px"
+                      height="169px"
                     />
                   </div>
                 </a>

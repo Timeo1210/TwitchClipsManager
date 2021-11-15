@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import HoverEffectWrapper from "../HoverEffectWrapper/HoverEffectWrapper";
+import HoverEffectWrapper from "../HoverEffectWrapper";
 
 export type DownloadButtonProps = {
   href?: string;
@@ -16,8 +16,17 @@ const DownloadButton = ({
   >
     <HoverEffectWrapper>
       <Link href={href || "#"}>
-        <a target="_blank">
-          <Image src="/images/icon-download.svg" width={40} height={40} />
+        <a
+          target="_blank"
+          aria-label="download corresponding clip"
+          rel="nofollow noopener noreferrer"
+        >
+          <Image
+            src="/images/icon-download.svg"
+            width={40}
+            height={40}
+            alt="download clip"
+          />
         </a>
       </Link>
     </HoverEffectWrapper>

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import HoverEffectWrapper from "@/components/HoverEffectWrapper/HoverEffectWrapper";
 import { VideosQuery } from "@/API";
 import { UnpackedArray } from "@/utils/UnpackedArray";
@@ -26,11 +27,12 @@ const VOD = ({ video }: VODProps): JSX.Element => {
             <Link href={video.url}>
               <a target="_blank">
                 <div className="w-full relative">
-                  <img
+                  <Image
                     src={videoThumbnailUrl}
                     className="rounded"
                     alt="thumbnail"
                     width="200px"
+                    height="113px"
                   />
                 </div>
               </a>

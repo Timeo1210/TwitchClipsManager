@@ -9,15 +9,25 @@ interface SortButtonProps {
 
 const SortButton = ({ position, imageUrl, onClick }: SortButtonProps) => (
   <div
+    style={{
+      borderLeftWidth: position === "l" ? "1px" : "0",
+      borderRightWidth: position === "r" ? "1px" : "0",
+    }}
     className={`bg-gray-800 flex items-center rounded-${position}-lg border-t border-${position} border-b border-gray-400`}
   >
     <button
       type="button"
+      aria-label={`switch to ${position === "l" ? "views" : "time"} order`}
       onClick={onClick}
       style={{ outline: "none" }}
       className="relative flex p-2 z-10"
     >
-      <Image src={imageUrl} width={25} height={25} />
+      <Image
+        src={imageUrl}
+        width={25}
+        height={25}
+        alt={`${position === "l" ? "views" : "time"} order`}
+      />
     </button>
   </div>
 );
