@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import LoadingIcon from "@/components/LoadingIcon";
 import ActionButton from "@/components/ActionButton/ActionButton";
 import { ChannelContext } from "@/contexts/ChannelContext";
-import { useVideosQuery } from "@/API";
+import useVideosQuery from "@/hooks/useVideosQuery";
 import VOD, { VODProps } from "./VOD";
 
 type VODWrapperProps = {
@@ -27,22 +27,12 @@ const VODsTool = (): JSX.Element => {
     oldVideos: [],
   });
 
-  const { isLoading, isError, data } = useVideosQuery(
-    {
-      user_id: channelContext.id,
-      after: queryStorage.cursor,
-      first: "10",
-      type: "archive",
-    },
-    {
-      staleTime: Infinity,
-      refetchOnMount: false,
-      refetchOnReconnect: false,
-      refetchOnWindowFocus: false,
-      retry: false,
-      // keepPreviousData: true,
-    }
-  );
+  const { isLoading, isError, data } = useVideosQuery({
+    user_id: channelContext.id,
+    after: queryStorage.cursor,
+    first: "10",
+    type: "archive",
+  });
 
   const videos = [...queryStorage.oldVideos, ...(data?.getByUser.videos || [])];
   const cursor = data?.getByUser.pagination.cursor || "";
