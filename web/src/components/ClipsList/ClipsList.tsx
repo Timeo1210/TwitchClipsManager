@@ -1,8 +1,7 @@
-import { useContext } from "react";
 import { FixedSizeList as List, ListChildComponentProps } from "react-window";
 import AutoSizer from "react-virtualized-auto-sizer";
 import { ClipsQuery } from "@/API";
-import { ClipsContext } from "@/contexts/ClipsContext";
+import useClipsQuery from "@/hooks/useClipsQuery";
 import SortingButtons from "./SortingButtons";
 import ClipItem from "./ClipItem";
 
@@ -15,7 +14,7 @@ const Row = ({ index, style, data }: RowProps): JSX.Element => (
 );
 
 const ClipsList = (): JSX.Element => {
-  const clipsContext = useContext(ClipsContext);
+  const clipsQuery = useClipsQuery();
 
   return (
     <div
@@ -35,10 +34,10 @@ const ClipsList = (): JSX.Element => {
           <List
             className="custom-scrollbar"
             height={height - 60} // check THIS
-            itemCount={clipsContext.clips.length}
+            itemCount={clipsQuery.data?.getByBroadcasterId.clips.length || 0}
             itemSize={110}
             width="100%"
-            itemData={clipsContext.clips}
+            itemData={clipsQuery.data?.getByBroadcasterId.clips}
           >
             {Row}
           </List>

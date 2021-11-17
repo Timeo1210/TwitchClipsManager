@@ -1,7 +1,7 @@
 /* eslint-disable react/no-array-index-key */
-import React, { useContext, useMemo } from "react";
-import { ClipsContext } from "@/contexts/ClipsContext";
+import React, { useMemo } from "react";
 import { useVideoContext } from "@/contexts/VideoContext";
+import useClipsQuery from "@/hooks/useClipsQuery";
 import TimelineClips from "./TimelineClips";
 import { TimelineClipsArray, getAllTimelineClips } from "./utils";
 
@@ -10,7 +10,7 @@ type TimelineProps = {
 };
 
 const Timeline = ({ forcedWidth }: TimelineProps): JSX.Element => {
-  const clipsContext = useContext(ClipsContext);
+  const clipsQuery = useClipsQuery();
   const videoContext = useVideoContext();
   const interval = Math.floor(forcedWidth / 6);
 
@@ -20,13 +20,13 @@ const Timeline = ({ forcedWidth }: TimelineProps): JSX.Element => {
         videoContext.video.created_at,
         videoContext.video.duration,
         interval,
-        clipsContext.clips
+        clipsQuery.data?.getByBroadcasterId.clips || []
       ),
     [
       videoContext.video.created_at,
       videoContext.video.duration,
       interval,
-      clipsContext.clips,
+      clipsQuery,
     ]
   );
 
