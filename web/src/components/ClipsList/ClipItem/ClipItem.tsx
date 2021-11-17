@@ -34,20 +34,22 @@ const ClipItem = ({ clip, style = {} }: ClipItemProps): JSX.Element => {
 
   return (
     <div className="flex p-1" style={style}>
-      <div
-        style={{ maxHeight: "95px", maxWidth: "170px" }}
-        className="w-full m-auto"
-      >
+      <div className="m-auto">
         <HoverEffectWrapper>
           <Link href={clip.url}>
             <a target="_blank" rel="nofollow noopener noreferrer">
-              <div className="w-full relative border-2 rounded border-purple-900">
+              <div
+                style={{
+                  width: "170px",
+                  height: "95px",
+                }}
+                className="relative border-2 rounded border-purple-900"
+              >
                 <Image
                   src={clipThumbnailUrl}
                   className="rounded object-cover"
                   alt="thumbnail"
-                  width="170px"
-                  height="95px"
+                  layout="fill"
                 />
               </div>
             </a>

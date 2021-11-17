@@ -17,7 +17,8 @@
     "react-spring": "^9.2.4",
     "react-use": "^17.3.1",
     "react-virtualized-auto-sizer": "^1.0.6",
-    "react-window": "^1.8.6"
+    "react-window": "^1.8.6",
+    "sharp": "^0.29.3"
   },
   "devDependencies": {
     "@graphql-codegen/cli": "1.21.7",

@@ -32,20 +32,19 @@ const VideoDetails = ({ video }: VideoDetailsProps): JSX.Element => {
           className="bg-gray-800 border-transparent bg-clip-padding border-2 flex flex-col items-center p-3"
         >
           <h1 className="text-3xl my-3 text-center">{video.title}</h1>
-          <div
-            style={{ maxWidth: "300px", minWidth: "300px" }}
-            className="w-full mb-3"
-          >
+          <div className="mb-3">
             <HoverEffectWrapper>
               <Link href={video.url}>
                 <a target="_blank" rel="nofollow noopener noreferrer">
-                  <div className="w-full relative border-2 rounded border-purple-900 ">
+                  <div
+                    style={{ width: "300px", height: "170px" }}
+                    className="relative border-2 rounded border-purple-900 "
+                  >
                     <Image
                       src={videoThumbnailUrl}
                       className="rounded"
                       alt="thumbnail"
-                      width="300px"
-                      height="169px"
+                      layout="fill"
                     />
                   </div>
                 </a>
