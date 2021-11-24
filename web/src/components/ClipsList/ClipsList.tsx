@@ -26,7 +26,7 @@ const ClipsList = (): JSX.Element => {
         <SortingButtons />
         <span className="ml-2">
           Cette fonctionnalité n&apos;est pas encore disponible !<br />
-          (par défaut les clips sont trier par vues)
+          (par défaut les clips sont triés par vues)
         </span>
       </div>
       <AutoSizer disableWidth>
