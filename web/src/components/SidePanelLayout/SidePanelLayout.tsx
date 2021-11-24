@@ -1,6 +1,7 @@
 import React, { HTMLAttributes, PropsWithChildren, useState } from "react";
 import { animated, useSpring, config } from "react-spring";
 import BurgerLogo from "@/components/BurgerLogo";
+import LinkButton from "@/components/LinkButton";
 
 type SidePanelProps = {
   menu: JSX.Element;
@@ -48,6 +49,12 @@ const SidePanelLayout = ({
         >
           <BurgerLogo height={20} isOpen={open} spanClasses="bg-purple-800" />
         </button>
+        <LinkButton
+          href="/"
+          imgSrc="/images/icon-home.svg"
+          imgAlt="navigate home"
+          containerClassName="mt-2"
+        />
       </div>
       <div className="relative flex-grow h-full">
         <div className="absolute top-0 left-0 h-full visible">{menu}</div>

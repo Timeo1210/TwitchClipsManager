@@ -11,6 +11,7 @@ import getVideoRawEndDate from "@/utils/getVideoRawEndDate";
 import useClipsQuery from "@/hooks/useClipsQuery";
 import LoadingIcon from "@/components/LoadingIcon/LoadingIcon";
 import VideoTimeline from "@/components/VideoTimeline";
+import LinkButton from "@/components/LinkButton/LinkButton";
 
 interface IParams extends ParsedUrlQuery {
   id: string;
@@ -31,13 +32,32 @@ const Video = ({
   return (
     <VideoProvider video={video}>
       <div className="bg-gray-900 flex flex-col items-center h-full p-2 overflow-y-scroll">
-        <Link href={`/channels/${video.user_id}`}>
-          <a>
-            <h1 className="text-6xl my-4 underline-effect">
-              {video.user_name}
-            </h1>
-          </a>
-        </Link>
+        <div
+          style={{ maxWidth: "1000px" }}
+          className="w-full flex justify-between items-center"
+        >
+          <LinkButton
+            href={`/channels/${video.user_id}`}
+            imgSrc="/images/icon-arrow-left.svg"
+            imgSquareSize={40}
+            imgAlt={`navigate to ${video.user_name} channel page`}
+            containerClassName="ml-2"
+          />
+          <Link href={`/channels/${video.user_id}`}>
+            <a>
+              <h1 className="text-6xl my-4 underline-effect">
+                {video.user_name}
+              </h1>
+            </a>
+          </Link>
+          <LinkButton
+            href="/"
+            imgSrc="/images/icon-home.svg"
+            imgSquareSize={40}
+            imgAlt="navigate home"
+            containerClassName="mr-2"
+          />
+        </div>
         <VideoDetails video={video} />
         {data !== undefined && data?.getByBroadcasterId.clips.length >= 1 && (
           <>
