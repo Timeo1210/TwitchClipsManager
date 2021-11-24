@@ -5,7 +5,7 @@ import { VideosQuery } from "@/API";
 import { UnpackedArray } from "@/utils/UnpackedArray";
 import formatThumbnailUrl from "@/utils/formatThumbnailUrl";
 import formatVideoDate from "@/utils/formatVideoDate";
-import LookupButton from "@/components/LookupButton";
+import LinkButton from "@/components/LinkButton/LinkButton";
 
 export type VODProps = {
   video: UnpackedArray<VideosQuery["getByUser"]["videos"]>;
@@ -39,7 +39,13 @@ const VOD = ({ video }: VODProps): JSX.Element => {
             </Link>
           </HoverEffectWrapper>
         </div>
-        <LookupButton href={`/videos/${video.id}`} className="sm:hidden m-2" />
+        <div className="flex sm:hidden m-2 justify-center items-center flex-shrink-0">
+          <LinkButton
+            href={`/videos/${video.id}`}
+            imgSrc="/images/icon-lookup.svg"
+            imgSquareSize={50}
+          />
+        </div>
       </div>
       <div className="flex flex-col justify-between items-center sm:items-start sm:pl-3 w-full text-center sm:text-left">
         <Link href={video.url}>
@@ -55,10 +61,13 @@ const VOD = ({ video }: VODProps): JSX.Element => {
           Durée : {video.duration} {formatVideoDate(video.created_at)}
         </span>
       </div>
-      <LookupButton
-        href={`/videos/${video.id}`}
-        className="hidden sm:flex m-3"
-      />
+      <div className="hidden sm:flex m-3 justify-center items-center flex-shrink-0">
+        <LinkButton
+          href={`/videos/${video.id}`}
+          imgSrc="/images/icon-lookup.svg"
+          imgSquareSize={50}
+        />
+      </div>
     </div>
   );
 };
