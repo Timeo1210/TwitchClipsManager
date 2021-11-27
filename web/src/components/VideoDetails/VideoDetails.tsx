@@ -45,6 +45,7 @@ const VideoDetails = ({ video }: VideoDetailsProps): JSX.Element => {
                       className="rounded"
                       alt="thumbnail"
                       layout="fill"
+                      priority
                     />
                   </div>
                 </a>
