@@ -10,7 +10,7 @@ let lastVariables: ClipsQueryVariables | undefined;
 const useClipsQuery = (
   variables?: ClipsQueryVariables
 ): UseQueryResult<ClipsQuery> => {
-  if (lastVariables === undefined) {
+  if (lastVariables === undefined || variables) {
     if (variables === undefined) throw new Error("An error occurred !");
     lastVariables = variables;
   }
