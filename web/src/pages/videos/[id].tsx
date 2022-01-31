@@ -62,7 +62,7 @@ const Video = ({
         {data !== undefined && data?.getByBroadcasterId.clips.length >= 1 && (
           <>
             <VideoTimeline />
-            <ClipsList />
+            <ClipsList clips={data.getByBroadcasterId.clips} video={video} />
           </>
         )}
         {isLoading && <LoadingIcon width={150} height={150} />}

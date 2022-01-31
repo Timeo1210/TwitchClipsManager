@@ -1,8 +1,7 @@
-import React from "react";
+import React, { useMemo } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { ClipsQuery } from "@/API";
-import { useVideoContext } from "@/contexts/VideoContext";
+import { ClipsQuery, VideoQuery } from "@/API";
 import HoverEffectWrapper from "@/components/HoverEffectWrapper/HoverEffectWrapper";
 import DownloadButton from "@/components/DownloadButton/DownloadButton";
 import { UnpackedArray } from "@/utils/UnpackedArray";
@@ -14,23 +13,30 @@ import getVideoClipCreateUrl from "@/utils/getVideoClipCreateUrl";
 
 type ClipItemProps = {
   clip: UnpackedArray<ClipsQuery["getByBroadcasterId"]["clips"]>;
+  videoContext?: VideoQuery["getById"] | null;
   style?: React.CSSProperties;
 };
 
-const ClipItem = ({ clip, style = {} }: ClipItemProps): JSX.Element => {
+const ClipItem = ({
+  clip,
+  style = {},
+  videoContext = null,
+}: ClipItemProps): JSX.Element => {
   const clipThumbnailUrl = formatThumbnailUrl(clip.thumbnail_url, 170, 98); // This is more or less useless
-  const videoContext = useVideoContext();
 
-  const twitchOffset = 1.5 * clip.duration * 1000; // Offset for better accuracy no logic here
-  const relativeElpasedTime =
-    getRelativeElapsedTime(videoContext.video.created_at, clip.created_at) -
-    twitchOffset;
-  const relativeRawElpasedTime = convertMsInRawDate(relativeElpasedTime);
   const downloadUrl = getClipDownloadUrl(clip.thumbnail_url);
-  const videoClipCreateUrl = getVideoClipCreateUrl(
-    videoContext.video.url,
-    relativeRawElpasedTime
-  );
+  const relativeRawElpasedTime = useMemo(() => {
+    if (!videoContext) return "";
+    const twitchOffset = 1.5 * clip.duration * 1000; // Offset for better accuracy no logic here
+    const relativeElpasedTime =
+      getRelativeElapsedTime(videoContext.created_at, clip.created_at) -
+      twitchOffset;
+    return convertMsInRawDate(relativeElpasedTime);
+  }, [clip.created_at, clip.duration, videoContext]);
+  const videoClipCreateUrlValue = useMemo(() => {
+    if (!videoContext) return "";
+    return getVideoClipCreateUrl(videoContext.url, relativeRawElpasedTime);
+  }, [relativeRawElpasedTime, videoContext]);
 
   return (
     <div className="flex p-1" style={style}>
@@ -47,9 +53,11 @@ const ClipItem = ({ clip, style = {} }: ClipItemProps): JSX.Element => {
               >
                 <Image
                   src={clipThumbnailUrl}
+                  width={170}
+                  height={93}
                   className="rounded object-cover"
                   alt="thumbnail"
-                  layout="fill"
+                  // layout="fill"
                 />
               </div>
             </a>
@@ -67,14 +75,22 @@ const ClipItem = ({ clip, style = {} }: ClipItemProps): JSX.Element => {
         <span className="text-gray-300">
           Nombre de vues : {clip.view_count}
         </span>
-        <Link href={videoClipCreateUrl}>
-          <a target="_blank" rel="nofollow noopener noreferrer">
-            <span className="text-gray-300 underline-effect">
-              Crée après : {relativeRawElpasedTime} ({Math.round(clip.duration)}
-              s)
-            </span>
-          </a>
-        </Link>
+        {videoContext && (
+          <Link href={videoClipCreateUrlValue}>
+            <a target="_blank" rel="nofollow noopener noreferrer">
+              <span className="text-gray-300 underline-effect">
+                Crée après : {relativeRawElpasedTime} (
+                {Math.round(clip.duration)}
+                s)
+              </span>
+            </a>
+          </Link>
+        )}
+        {!videoContext && (
+          <span className="text-gray-300">
+            Durée : {Math.round(clip.duration)}s
+          </span>
+        )}
       </div>
       <DownloadButton href={downloadUrl} className="m-3" />
     </div>
@@ -83,6 +99,7 @@ const ClipItem = ({ clip, style = {} }: ClipItemProps): JSX.Element => {
 
 ClipItem.defaultProps = {
   style: {},
+  videoContext: null,
 };
 
 export default ClipItem;
