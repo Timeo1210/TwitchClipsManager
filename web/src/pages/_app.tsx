@@ -4,6 +4,8 @@ import { QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
 import queryClient from "@/utils/queryClient";
 import "@/styles/globals.css";
+import "@/styles/react-datepicker/custom-react-datepicker.css";
+import { StrictMode } from "react";
 
 // static-cdn.jtvnw.net *.twitch.tv
 const CSP = `
@@ -17,18 +19,20 @@ connect-src 'self' ${process.env.NEXT_PUBLIC_API_URL}`;
 
 const MyApp = ({ Component, pageProps }: AppProps): JSX.Element => (
   <>
-    <QueryClientProvider client={queryClient}>
-      <Head>
-        <title>Twitch Clips Manager</title>
-        <meta
-          name="description"
-          content="Tool that let you download and manage twitch's VODs and clips"
-        />
-        <meta httpEquiv="Content-Security-Policy" content={CSP} />
-      </Head>
-      <Component {...pageProps} />
-      <ReactQueryDevtools initialIsOpen />
-    </QueryClientProvider>
+    <StrictMode>
+      <QueryClientProvider client={queryClient}>
+        <Head>
+          <title>Twitch Clips Manager</title>
+          <meta
+            name="description"
+            content="Tool that let you download and manage twitch's VODs and clips"
+          />
+          <meta httpEquiv="Content-Security-Policy" content={CSP} />
+        </Head>
+        <Component {...pageProps} />
+        <ReactQueryDevtools initialIsOpen />
+      </QueryClientProvider>
+    </StrictMode>
   </>
 );
 
