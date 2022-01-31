@@ -1,7 +1,14 @@
-import React, { HTMLAttributes, PropsWithChildren, useState } from "react";
+import React, {
+  HTMLAttributes,
+  PropsWithChildren,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 import { animated, useSpring, config } from "react-spring";
 import BurgerLogo from "@/components/BurgerLogo";
 import LinkButton from "@/components/LinkButton";
+import { ToolContext } from "@/contexts/ToolContext";
 
 type SidePanelProps = {
   menu: JSX.Element;
@@ -21,7 +28,8 @@ const SidePanelLayout = ({
   wrapperClasses,
   children,
 }: PropsWithChildren<SidePanelProps>): JSX.Element => {
-  const [open, setOpen] = useState(false);
+  const toolContext = useContext(ToolContext);
+  const [open, setOpen] = useState(true);
   const { mainOffset } = useSpring({
     reset: true,
     reverse: !open,
@@ -35,6 +43,10 @@ const SidePanelLayout = ({
     mainOffset: 0,
   });
 
+  useEffect(() => {
+    setOpen(false); // Close panel when changing tools
+  }, [toolContext.tool, setOpen]);
+
   return (
     <div className={`flex justify-start h-full ${wrapperClasses}`}>
       <div
@@ -43,6 +55,7 @@ const SidePanelLayout = ({
       >
         <button
           type="button"
+          aria-label="Show Menu"
           onClick={() => setOpen(!open)}
           style={{ outline: "none" }}
           className="w-full p-1 sm:p-2"
