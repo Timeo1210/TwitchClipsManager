@@ -1,6 +1,6 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import DatePicker from "react-datepicker";
-import { ChannelContext } from "@/contexts/ChannelContext";
+import { useChannelContext } from "@/contexts/ChannelContext";
 import useClipsQuery from "@/hooks/useClipsQuery";
 import LoadingIcon from "@/components/LoadingIcon/LoadingIcon";
 import ClipsList from "@/components/ClipsList/ClipsList";
@@ -30,7 +30,7 @@ const HandleErrors = (isError: boolean, error: unknown): JSX.Element => {
 };
 
 const ClipsTool = (): JSX.Element => {
-  const channelContext = useContext(ChannelContext);
+  const channelContext = useChannelContext();
   const [dateRange, setDateRange] = useState<[Date | null, Date | null]>([
     null,
     null,

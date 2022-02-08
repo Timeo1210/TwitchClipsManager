@@ -1,12 +1,11 @@
-import { useContext } from "react";
 import Image from "next/image";
-import { ChannelContext } from "@/contexts/ChannelContext";
+import { useChannelContext } from "@/contexts/ChannelContext";
 import formatViewCount from "@/utils/formatViewCount";
 import { Tools } from "@/utils/toolReducer";
 import BurgerButton from "./BurgerButton";
 
 const Burger = (): JSX.Element => {
-  const channelContext = useContext(ChannelContext);
+  const channelContext = useChannelContext();
   return (
     <div style={{ minWidth: "200px" }} className="h-full">
       <div className="flex flex-col items-center bg-gray-800 bg-opacity-50 shadow text-lg h-full">

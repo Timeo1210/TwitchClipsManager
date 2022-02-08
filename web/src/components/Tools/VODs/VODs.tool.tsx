@@ -1,7 +1,7 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import LoadingIcon from "@/components/LoadingIcon";
 import ActionButton from "@/components/ActionButton/ActionButton";
-import { ChannelContext } from "@/contexts/ChannelContext";
+import { useChannelContext } from "@/contexts/ChannelContext";
 import useVideosQuery from "@/hooks/useVideosQuery";
 import VOD, { VODProps } from "./VOD";
 
@@ -17,7 +17,7 @@ const VODWrapper = ({ video, index }: VODWrapperProps): JSX.Element => (
 );
 
 const VODsTool = (): JSX.Element => {
-  const channelContext = useContext(ChannelContext);
+  const channelContext = useChannelContext();
   const [canHandleMoreButton, setCanHandleMoreButton] = useState(true);
   const [queryStorage, setQueryStorage] = useState<{
     cursor: string;
