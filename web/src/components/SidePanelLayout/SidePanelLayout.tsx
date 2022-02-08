@@ -1,14 +1,13 @@
 import React, {
   HTMLAttributes,
   PropsWithChildren,
-  useContext,
   useEffect,
   useState,
 } from "react";
 import { animated, useSpring, config } from "react-spring";
 import BurgerLogo from "@/components/BurgerLogo";
 import LinkButton from "@/components/LinkButton";
-import { ToolContext } from "@/contexts/ToolContext";
+import { useToolContext } from "@/contexts/ToolContext";
 
 type SidePanelProps = {
   menu: JSX.Element;
@@ -28,7 +27,7 @@ const SidePanelLayout = ({
   wrapperClasses,
   children,
 }: PropsWithChildren<SidePanelProps>): JSX.Element => {
-  const toolContext = useContext(ToolContext);
+  const toolContext = useToolContext();
   const [open, setOpen] = useState(true);
   const { mainOffset } = useSpring({
     reset: true,
