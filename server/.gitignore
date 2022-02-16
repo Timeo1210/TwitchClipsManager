@@ -1,0 +1,8 @@
+node_modules
+build
+dist
+.env.development
+.env.production
+.env
+*.tar
+src/interface-adapters/dtos

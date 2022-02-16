@@ -1,0 +1,34 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import "./effects/underline.css";
+@import "./effects/hover.css";
+@import "./scrollbar.css";
+
+@layer base {
+  @font-face {
+    font-family: "Alata";
+    src: url("/fonts/Alata/Alata-Regular.ttf");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+  }
+}
+
+* {
+  font-family: "Alata", Arial, Helvetica, sans-serif;
+  color: rgba(243, 244, 246); /* text-gray-100 */
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  overflow-x: hidden;
+}
+
+#__next {
+  height: 100%;
+}

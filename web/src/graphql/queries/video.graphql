@@ -1,0 +1,15 @@
+query Video($id: String!) {
+  getById(id: $id) {
+    id
+    user_id
+    user_name
+    title
+    description
+    created_at
+    published_at
+    url
+    thumbnail_url
+    view_count
+    duration
+  }
+}

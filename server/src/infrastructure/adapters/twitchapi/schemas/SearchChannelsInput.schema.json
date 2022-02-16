@@ -1,0 +1,16 @@
+{
+  "type": "object",
+  "required": ["query"],
+  "properties": {
+    "query": { "type": "string" },
+    "first": {
+      "type": "integer",
+      "nullable": true,
+      "minimum": 0,
+      "maximum": 100
+    },
+    "after": { "type": "string", "nullable": true },
+    "live_only": { "type": "boolean", "nullable": true }
+  },
+  "additionalProperties": false
+}
