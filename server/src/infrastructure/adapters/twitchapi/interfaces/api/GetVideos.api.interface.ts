@@ -1,7 +1,7 @@
-import { VideoObject } from "@/core/entity/Video.entity";
+import { VideoEntity } from "@/core/entity/Video.entity";
 
 export interface GetVideosApiOutput {
-  data: VideoObject[];
+  data: VideoEntity[];
   pagination: {
     cursor: string;
   };
