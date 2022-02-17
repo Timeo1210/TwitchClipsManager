@@ -18,7 +18,7 @@
     "ecmaFeatures": {
       "jsx": true
     },
-    "project": "./web/tsconfig.json" // "./web/tsconfig.json" in dev env
+    "project": "./tsconfig.json" // "./web/tsconfig.json" in dev env
   },
   "plugins": ["@typescript-eslint", "react", "react-hooks", "prettier"],
   "rules": {
@@ -32,7 +32,7 @@
         "specialLink": ["hrefLeft", "hrefRight"],
         "aspects": ["invalidHref", "preferButton"]
       }
-    ]
-    // "import/no-extraneous-dependencies": ["error", { "packageDir": "./web/" }] // tricky but needed for the others package.json in project "./web/" in dev env
+    ],
+    "import/no-extraneous-dependencies": ["error", { "packageDir": "./web/" }] // tricky but needed for the others package.json in project "./web/" in dev env
   }
 }
