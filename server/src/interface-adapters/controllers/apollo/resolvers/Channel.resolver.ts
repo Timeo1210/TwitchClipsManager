@@ -9,7 +9,7 @@ import { GetChannelArgs } from "../ArgsTypes/Channel.argsType";
 @Resolver(Channel)
 export class ChannelResolver {
   @Query(() => Channel)
-  async get(@Args() request: GetChannelArgs) {
+  async Channel_get(@Args() request: GetChannelArgs) {
     if (request.id === "") throw new UserInputError(`Invalid "id" !`);
     try {
       const response = await ChannelService.get(request);
