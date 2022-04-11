@@ -1,8 +1,10 @@
 node_modules
 build
+data
 dist
 .env.development
 .env.production
 .env
 *.tar
 src/interface-adapters/dtos
+*.bak
