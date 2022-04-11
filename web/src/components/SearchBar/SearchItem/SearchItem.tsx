@@ -4,7 +4,7 @@ import { UnpackedArray } from "@/utils/UnpackedArray";
 import { SearchChannelsQuery } from "@/API";
 
 type SearchItemProps = {
-  value: UnpackedArray<SearchChannelsQuery["search"]>;
+  value: UnpackedArray<SearchChannelsQuery["SearchChannels_search"]>;
 };
 
 const SearchItem = ({ value }: SearchItemProps): JSX.Element => (

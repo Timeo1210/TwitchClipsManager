@@ -10,7 +10,7 @@ import { GetByUserVideosArgs } from "../ArgsTypes/Videos.argsType";
 @Resolver(Videos)
 export class VideosResolver {
   @Query(() => Videos)
-  async getByUser(@Args() request: GetByUserVideosArgs) {
+  async Videos_getByUser(@Args() request: GetByUserVideosArgs) {
     try {
       const response = await VideoService.getByUser(request);
       if (response) return response;

@@ -2,17 +2,19 @@ import React, { PropsWithChildren, useContext } from "react";
 import { ChannelQuery } from "@/API";
 
 export const ChannelContext = React.createContext<
-  ChannelQuery["get"] | undefined
+  ChannelQuery["Channel_get"] | undefined
 >(undefined);
 
 export const ChannelProvider = ({
   children,
   channel,
-}: PropsWithChildren<{ channel: ChannelQuery["get"] }>): JSX.Element => (
+}: PropsWithChildren<{
+  channel: ChannelQuery["Channel_get"];
+}>): JSX.Element => (
   <ChannelContext.Provider value={channel}>{children}</ChannelContext.Provider>
 );
 
-export const useChannelContext = (): ChannelQuery["get"] => {
+export const useChannelContext = (): ChannelQuery["Channel_get"] => {
   const context = useContext(ChannelContext);
   if (context === undefined)
     throw new Error("useChannelContext must be used within a ChannelProvider");
