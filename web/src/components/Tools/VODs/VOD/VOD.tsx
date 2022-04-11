@@ -8,7 +8,7 @@ import formatVideoDate from "@/utils/formatVideoDate";
 import LinkButton from "@/components/LinkButton/LinkButton";
 
 export type VODProps = {
-  video: UnpackedArray<VideosQuery["getByUser"]["videos"]>;
+  video: UnpackedArray<VideosQuery["Videos_getByUser"]["videos"]>;
 };
 
 const VOD = ({ video }: VODProps): JSX.Element => {

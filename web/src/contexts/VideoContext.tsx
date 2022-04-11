@@ -1,7 +1,7 @@
 import { VideoQuery } from "@/API";
 import React, { PropsWithChildren, useContext, useState } from "react";
 
-type State = VideoQuery["getById"];
+type State = VideoQuery["Video_getById"];
 type Dispatch = React.Dispatch<React.SetStateAction<State>>;
 type VideoProviderProps = PropsWithChildren<{ video: State }>;
 

@@ -1,5 +1,5 @@
 query Videos($user_id: String!, $after: String, $before: String, $first: String, $period: String, $sort: String, $type: String) {
-  getByUser(user_id: $user_id, after: $after, before: $before, first: $first, period: $period, sort: $sort, type: $type) {
+  Videos_getByUser(user_id: $user_id, after: $after, before: $before, first: $first, period: $period, sort: $sort, type: $type) {
     videos {
       id
       title

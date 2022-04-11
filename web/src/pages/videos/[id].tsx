@@ -59,12 +59,16 @@ const Video = ({
           />
         </div>
         <VideoDetails video={video} />
-        {data !== undefined && data?.getByBroadcasterId.clips.length >= 1 && (
-          <>
-            <VideoTimeline />
-            <ClipsList clips={data.getByBroadcasterId.clips} video={video} />
-          </>
-        )}
+        {data !== undefined &&
+          data?.Clips_getByBroadcasterId.clips.length >= 1 && (
+            <>
+              <VideoTimeline />
+              <ClipsList
+                clips={data.Clips_getByBroadcasterId.clips}
+                video={video}
+              />
+            </>
+          )}
         {isLoading && <LoadingIcon width={150} height={150} />}
         {isError && <h1>Une erreur est survenue !</h1>}
       </div>
@@ -84,13 +88,13 @@ export const getServerSideProps = async (
     )();
     return {
       props: {
-        video: data.getById,
+        video: data.Video_getById,
       },
     };
   } catch {
     return {
       props: {
-        video: {} as VideoQuery["getById"], // trick to ensure correct type
+        video: {} as VideoQuery["Video_getById"], // trick to ensure correct type
       },
       redirect: { permanent: true, destination: "/404" },
     };

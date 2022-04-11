@@ -42,7 +42,7 @@ const ClipsTool = (): JSX.Element => {
   const [canHandleMoreButton, setCanHandleMoreButton] = useState(true);
   const [queryStorage, setQueryStorage] = useState<{
     cursor: string;
-    oldClips: ClipsQuery["getByBroadcasterId"]["clips"];
+    oldClips: ClipsQuery["Clips_getByBroadcasterId"]["clips"];
   }>({
     cursor: "",
     oldClips: [],
@@ -58,15 +58,15 @@ const ClipsTool = (): JSX.Element => {
 
   const clips = [
     ...queryStorage.oldClips,
-    ...(data?.getByBroadcasterId.clips || []),
+    ...(data?.Clips_getByBroadcasterId.clips || []),
   ];
-  const cursor = data?.getByBroadcasterId.pagination.cursor || "";
+  const cursor = data?.Clips_getByBroadcasterId.pagination.cursor || "";
 
   useEffect(() => {
-    if (data?.getByBroadcasterId.pagination.cursor === null) {
+    if (data?.Clips_getByBroadcasterId.pagination.cursor === null) {
       setCanHandleMoreButton(false);
     }
-  }, [data?.getByBroadcasterId.pagination.cursor]);
+  }, [data?.Clips_getByBroadcasterId.pagination.cursor]);
 
   const handleMoreClips = () => {
     setQueryStorage({

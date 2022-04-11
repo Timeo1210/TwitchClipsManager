@@ -9,7 +9,7 @@ import { GetByIdVideoArgs } from "../ArgsTypes/Video.argsType";
 @Resolver(Video)
 export class VideoResolver {
   @Query(() => Video)
-  async getById(@Args() request: GetByIdVideoArgs) {
+  async Video_getById(@Args() request: GetByIdVideoArgs) {
     try {
       const response = await VideoService.getById(request);
       if (response) return response;
