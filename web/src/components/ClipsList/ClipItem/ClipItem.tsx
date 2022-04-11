@@ -12,8 +12,8 @@ import getClipDownloadUrl from "@/utils/getClipDownloadUrl";
 import getVideoClipCreateUrl from "@/utils/getVideoClipCreateUrl";
 
 type ClipItemProps = {
-  clip: UnpackedArray<ClipsQuery["getByBroadcasterId"]["clips"]>;
-  videoContext?: VideoQuery["getById"] | null;
+  clip: UnpackedArray<ClipsQuery["Clips_getByBroadcasterId"]["clips"]>;
+  videoContext?: VideoQuery["Video_getById"] | null;
   style?: React.CSSProperties;
 };
 

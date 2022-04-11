@@ -20,7 +20,7 @@ const Timeline = ({ forcedWidth }: TimelineProps): JSX.Element => {
         videoContext.video.created_at,
         videoContext.video.duration,
         interval,
-        clipsQuery.data?.getByBroadcasterId.clips || []
+        clipsQuery.data?.Clips_getByBroadcasterId.clips || []
       ),
     [
       videoContext.video.created_at,

@@ -6,8 +6,8 @@ import ClipItem from "./ClipItem";
 
 interface RowProps extends ListChildComponentProps {
   data: {
-    clips: ClipsQuery["getByBroadcasterId"]["clips"];
-    videoContext: VideoQuery["getById"] | null;
+    clips: ClipsQuery["Clips_getByBroadcasterId"]["clips"];
+    videoContext: VideoQuery["Video_getById"] | null;
   };
 }
 
@@ -20,8 +20,8 @@ const Row = ({ index, style, data }: RowProps): JSX.Element => (
 );
 
 type ClipsListProps = {
-  clips: ClipsQuery["getByBroadcasterId"]["clips"];
-  video?: VideoQuery["getById"] | null;
+  clips: ClipsQuery["Clips_getByBroadcasterId"]["clips"];
+  video?: VideoQuery["Video_getById"] | null;
   style?: React.CSSProperties;
 };
 

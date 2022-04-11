@@ -11,7 +11,7 @@ import HoverEffectWrapper from "../HoverEffectWrapper";
 import GridCell from "./GridCell";
 
 type VideoDetailsProps = {
-  video: UnpackedArray<VideoQuery["getById"]>;
+  video: UnpackedArray<VideoQuery["Video_getById"]>;
 };
 
 const VideoDetails = ({ video }: VideoDetailsProps): JSX.Element => {

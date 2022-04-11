@@ -40,13 +40,13 @@ export const getServerSideProps = async (
     )();
     return {
       props: {
-        channel: data.get,
+        channel: data.Channel_get,
       },
     };
   } catch {
     return {
       props: {
-        channel: {} as ChannelQuery["get"], // trick to ensure correct type
+        channel: {} as ChannelQuery["Channel_get"], // trick to ensure correct type
       },
       redirect: { permanent: true, destination: "/404" },
     };
