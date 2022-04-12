@@ -15,6 +15,7 @@ export const TwitchApiAdapter = {
   API: new TwitchApi({
     id: process.env.TWITCHAPI_CLIENT || "",
     secret: process.env.TWITCHAPI_SECRET || "",
+    gql_id: process.env.TWITCHAPI_GQL_CLIENT || "",
   }),
   refreshSetup: async (): Promise<number> => TwitchApiAdapter.API.setup(),
   run: async (): Promise<void> => {

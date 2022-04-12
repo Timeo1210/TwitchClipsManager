@@ -16,10 +16,15 @@ import {
   GetClipsApiInput,
   GetClipsApiOutput,
 } from "./interfaces/api/GetClips.api.interface";
+import {
+  GenerateMP4ApiInput,
+  GenerateMP4ApiOutput,
+} from "./interfaces/api/GenerateMP4.api.interface";
 
 interface ClientInterface {
   id: string;
   secret: string;
+  gql_id: string;
 }
 
 export class TwitchApi {
@@ -34,6 +39,7 @@ export class TwitchApi {
     this.client = {
       id: client.id,
       secret: client.secret,
+      gql_id: client.gql_id,
     };
     this.baseUrl = "https://api.twitch.tv/helix";
     this.headers = { "Client-Id": this.client.id, Authorization: "" };
@@ -129,5 +135,21 @@ export class TwitchApi {
       params: input,
     } as AxiosRequestConfig;
     return (await this.makeRequest(config)) as GetClipsApiOutput;
+  }
+
+  public async generateMP4(
+    input: GenerateMP4ApiInput
+  ): Promise<GenerateMP4ApiOutput> {
+    const config = {
+      method: "POST",
+      baseURL: "https://gql.twitch.tv",
+      url: "/gql",
+      headers: {
+        "Client-Id": this.client.gql_id,
+        "Content-Type": "text/plain",
+      },
+      data: input.data,
+    } as AxiosRequestConfig;
+    return (await this.makeRequest(config)) as GenerateMP4ApiOutput;
   }
 }
