@@ -1,0 +1,7 @@
+mutation VideostateAction($request: String!) {
+  Videostate_postById(request: {video_id: $request}) {
+    video_id
+    state
+    download_url
+  }
+}
