@@ -102,9 +102,7 @@ const generateMP4 = async (
     };
     if (!data.video) return videostate;
 
-    console.log(data.video.download.status);
     if (data.video.download.status in VIDEOSTATE) {
-      console.log("HERE");
       videostate.state = data.video.download.status as VIDEOSTATE;
       videostate.download_url = data.video.download.url;
     }
