@@ -6,6 +6,7 @@ import { UnpackedArray } from "@/utils/UnpackedArray";
 import formatThumbnailUrl from "@/utils/formatThumbnailUrl";
 import formatVideoDate from "@/utils/formatVideoDate";
 import getVideoRawEndDate from "@/utils/getVideoRawEndDate";
+import calculateVODDownloadRawProcessTime from "@/utils/calculateVODDownloadRawProcessTime";
 import ActionButton from "@/components/ActionButton";
 import VideostateDetails from "@/components/VideostateDetails";
 import HoverEffectWrapper from "../HoverEffectWrapper";
@@ -19,6 +20,9 @@ const VideoDetails = ({ video }: VideoDetailsProps): JSX.Element => {
   const [hasMutate, setHasMutate] = useState<boolean>(false);
   const videoThumbnailUrl = formatThumbnailUrl(video.thumbnail_url, 300, 169);
   const videoRawEndDate = getVideoRawEndDate(video.created_at, video.duration);
+  const VODDownloadProcessTime = calculateVODDownloadRawProcessTime(
+    video.duration
+  );
 
   const useVideostateMutation = useVideostateActionMutation({
     onMutate: () => setHasMutate(true),
@@ -85,15 +89,19 @@ const VideoDetails = ({ video }: VideoDetailsProps): JSX.Element => {
         </div>
       </div>
       <div className="bg-gray-800 border-transparent bg-clip-padding border-2 border-t-0 flex justify-center">
-        {!hasMutate && (
+        {hasMutate ? (
+          <VideostateDetails video_id={video.id} />
+        ) : (
           <ActionButton
             onClick={() => useVideostateMutation.mutate({ request: video.id })}
-            className="m-2 p-2 text-3xl font-semibold"
+            className="m-2 p-2 text-3xl font-semibold flex flex-col items-center text-center"
           >
             <span className="tracking-widest">Télécharger</span>
+            <span className="mt-1 text-xs">
+              (Environ {VODDownloadProcessTime} de traitement)
+            </span>
           </ActionButton>
         )}
-        {hasMutate && <VideostateDetails video_id={video.id} />}
       </div>
     </div>
   );

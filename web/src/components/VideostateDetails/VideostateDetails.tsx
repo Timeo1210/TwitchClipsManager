@@ -10,8 +10,8 @@ const VideostateDetails = ({
   video_id,
 }: VideostateDetailsProps): JSX.Element => {
   const { isLoading, isError, data } = useVideostateQuery({ video_id });
-  const isInvalid = data?.Videostate_getById.state === "INVALID" ? true : false;
-  const isDownloadable = data?.Videostate_getById.download_url ? true : false;
+  const isInvalid = data?.Videostate_getById.state === "INVALID";
+  const isDownloadable = !!data?.Videostate_getById.download_url;
 
   return (
     <div className="m-2 p-2 text-3xl flex flex-col items-center justify-center text-center">
