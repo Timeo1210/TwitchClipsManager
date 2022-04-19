@@ -1,7 +1,6 @@
 import { useMutation, UseMutationOptions, useQuery, UseQueryOptions } from 'react-query';
 import { customFetcher } from '@/utils/graphqlFetcher';
 export type Maybe<T> = T | null;
-export type InputMaybe<T> = Maybe<T>;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
 export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
 export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
@@ -17,7 +16,6 @@ export type Scalars = {
 export type Channel = {
   __typename?: 'Channel';
   broadcaster_type: Scalars['String'];
-  created_at: Scalars['Float'];
   description: Scalars['String'];
   display_name: Scalars['String'];
   id: Scalars['String'];
@@ -26,25 +24,26 @@ export type Channel = {
   profile_image_url: Scalars['String'];
   type: Scalars['String'];
   view_count: Scalars['Int'];
+  created_at: Scalars['Float'];
 };
 
 export type Clip = {
   __typename?: 'Clip';
+  id: Scalars['String'];
+  url: Scalars['String'];
+  embed_url: Scalars['String'];
   broadcaster_id: Scalars['String'];
   broadcaster_name: Scalars['String'];
-  created_at: Scalars['String'];
   creator_id: Scalars['String'];
   creator_name: Scalars['String'];
-  duration: Scalars['Float'];
-  embed_url: Scalars['String'];
-  game_id: Scalars['String'];
-  id: Scalars['String'];
-  language: Scalars['String'];
-  thumbnail_url: Scalars['String'];
-  title: Scalars['String'];
-  url: Scalars['String'];
   video_id: Scalars['String'];
+  game_id: Scalars['String'];
+  language: Scalars['String'];
+  title: Scalars['String'];
   view_count: Scalars['Float'];
+  created_at: Scalars['String'];
+  thumbnail_url: Scalars['String'];
+  duration: Scalars['Float'];
 };
 
 export type Clips = {
@@ -74,37 +73,6 @@ export type PostByIdVideostateInput = {
 
 export type Query = {
   __typename?: 'Query';
-<<<<<<< HEAD
-  Channel_get: Channel;
-  Clips_getByBroadcasterId: Clips;
-  Hello_hello: Scalars['String'];
-  SearchChannels_search: Array<SearchChannels>;
-  Video_getById: Video;
-  Videos_getByUser: Videos;
-};
-
-
-export type QueryChannel_GetArgs = {
-  id: Scalars['String'];
-};
-
-
-export type QueryClips_GetByBroadcasterIdArgs = {
-  after?: InputMaybe<Scalars['String']>;
-  before?: InputMaybe<Scalars['String']>;
-  broadcaster_id: Scalars['String'];
-  ended_at?: InputMaybe<Scalars['String']>;
-  first?: InputMaybe<Scalars['Float']>;
-  started_at?: InputMaybe<Scalars['String']>;
-};
-
-
-export type QuerySearchChannels_SearchArgs = {
-  after?: InputMaybe<Scalars['String']>;
-  first?: InputMaybe<Scalars['Int']>;
-  live_only?: InputMaybe<Scalars['Boolean']>;
-  query: Scalars['String'];
-=======
   Hello_hello: Scalars['String'];
   SearchChannels_search: Array<SearchChannels>;
   Channel_get: Channel;
@@ -136,7 +104,6 @@ export type QueryVideos_GetByUserArgs = {
   period?: Maybe<Scalars['String']>;
   sort?: Maybe<Scalars['String']>;
   type?: Maybe<Scalars['String']>;
->>>>>>> feature/VODDownload
 };
 
 
@@ -145,16 +112,6 @@ export type QueryVideo_GetByIdArgs = {
 };
 
 
-<<<<<<< HEAD
-export type QueryVideos_GetByUserArgs = {
-  after?: InputMaybe<Scalars['String']>;
-  before?: InputMaybe<Scalars['String']>;
-  first?: InputMaybe<Scalars['String']>;
-  period?: InputMaybe<Scalars['String']>;
-  sort?: InputMaybe<Scalars['String']>;
-  type?: InputMaybe<Scalars['String']>;
-  user_id: Scalars['String'];
-=======
 export type QueryClips_GetByBroadcasterIdArgs = {
   broadcaster_id: Scalars['String'];
   after?: Maybe<Scalars['String']>;
@@ -162,7 +119,6 @@ export type QueryClips_GetByBroadcasterIdArgs = {
   ended_at?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Float']>;
   started_at?: Maybe<Scalars['String']>;
->>>>>>> feature/VODDownload
 };
 
 
@@ -179,37 +135,37 @@ export type SearchChannels = {
   game_name: Scalars['String'];
   id: Scalars['String'];
   is_live: Scalars['Boolean'];
-  started_at: Scalars['String'];
   tag_ids: Array<Scalars['String']>;
   thumbnail_url: Scalars['String'];
   title: Scalars['String'];
+  started_at: Scalars['String'];
 };
 
 export type Video = {
   __typename?: 'Video';
-  created_at: Scalars['String'];
-  description: Scalars['String'];
-  duration: Scalars['String'];
   id: Scalars['String'];
-  language: Scalars['String'];
-  muted_segments: Scalars['String'];
-  published_at: Scalars['String'];
   stream_id: Scalars['String'];
-  thumbnail_url: Scalars['String'];
-  title: Scalars['String'];
-  type: Scalars['String'];
-  url: Scalars['String'];
   user_id: Scalars['String'];
   user_login: Scalars['String'];
   user_name: Scalars['String'];
-  view_count: Scalars['Float'];
+  title: Scalars['String'];
+  description: Scalars['String'];
+  created_at: Scalars['String'];
+  published_at: Scalars['String'];
+  url: Scalars['String'];
+  thumbnail_url: Scalars['String'];
   viewable: Scalars['String'];
+  view_count: Scalars['Float'];
+  language: Scalars['String'];
+  type: Scalars['String'];
+  duration: Scalars['String'];
+  muted_segments: Scalars['String'];
 };
 
 export type Videos = {
   __typename?: 'Videos';
-  pagination: Pagination;
   videos: Array<Video>;
+  pagination: Pagination;
 };
 
 export type Videostate = {
@@ -237,9 +193,6 @@ export type ChannelQueryVariables = Exact<{
 }>;
 
 
-<<<<<<< HEAD
-export type ChannelQuery = { __typename?: 'Query', Channel_get: { __typename?: 'Channel', id: string, display_name: string, profile_image_url: string, view_count: number } };
-=======
 export type ChannelQuery = (
   { __typename?: 'Query' }
   & { Channel_get: (
@@ -247,21 +200,17 @@ export type ChannelQuery = (
     & Pick<Channel, 'id' | 'display_name' | 'profile_image_url' | 'view_count'>
   ) }
 );
->>>>>>> feature/VODDownload
 
 export type ClipsQueryVariables = Exact<{
   broadcaster_id: Scalars['String'];
-  after?: InputMaybe<Scalars['String']>;
-  before?: InputMaybe<Scalars['String']>;
-  first?: InputMaybe<Scalars['Float']>;
-  started_at?: InputMaybe<Scalars['String']>;
-  ended_at?: InputMaybe<Scalars['String']>;
+  after?: Maybe<Scalars['String']>;
+  before?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Float']>;
+  started_at?: Maybe<Scalars['String']>;
+  ended_at?: Maybe<Scalars['String']>;
 }>;
 
 
-<<<<<<< HEAD
-export type ClipsQuery = { __typename?: 'Query', Clips_getByBroadcasterId: { __typename?: 'Clips', clips: Array<{ __typename?: 'Clip', id: string, url: string, title: string, view_count: number, created_at: string, thumbnail_url: string, duration: number }>, pagination: { __typename?: 'Pagination', cursor?: string | null } } };
-=======
 export type ClipsQuery = (
   { __typename?: 'Query' }
   & { Clips_getByBroadcasterId: (
@@ -275,31 +224,23 @@ export type ClipsQuery = (
     ) }
   ) }
 );
->>>>>>> feature/VODDownload
 
 export type HelloQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-<<<<<<< HEAD
-export type HelloQuery = { __typename?: 'Query', Hello_hello: string };
-=======
 export type HelloQuery = (
   { __typename?: 'Query' }
   & Pick<Query, 'Hello_hello'>
 );
->>>>>>> feature/VODDownload
 
 export type SearchChannelsQueryVariables = Exact<{
   query: Scalars['String'];
-  first?: InputMaybe<Scalars['Int']>;
-  after?: InputMaybe<Scalars['String']>;
-  live_only?: InputMaybe<Scalars['Boolean']>;
+  first?: Maybe<Scalars['Int']>;
+  after?: Maybe<Scalars['String']>;
+  live_only?: Maybe<Scalars['Boolean']>;
 }>;
 
 
-<<<<<<< HEAD
-export type SearchChannelsQuery = { __typename?: 'Query', SearchChannels_search: Array<{ __typename?: 'SearchChannels', id: string, display_name: string, thumbnail_url: string }> };
-=======
 export type SearchChannelsQuery = (
   { __typename?: 'Query' }
   & { SearchChannels_search: Array<(
@@ -307,16 +248,12 @@ export type SearchChannelsQuery = (
     & Pick<SearchChannels, 'id' | 'display_name' | 'thumbnail_url'>
   )> }
 );
->>>>>>> feature/VODDownload
 
 export type VideoQueryVariables = Exact<{
   id: Scalars['String'];
 }>;
 
 
-<<<<<<< HEAD
-export type VideoQuery = { __typename?: 'Query', Video_getById: { __typename?: 'Video', id: string, user_id: string, user_name: string, title: string, description: string, created_at: string, published_at: string, url: string, thumbnail_url: string, view_count: number, duration: string } };
-=======
 export type VideoQuery = (
   { __typename?: 'Query' }
   & { Video_getById: (
@@ -324,22 +261,18 @@ export type VideoQuery = (
     & Pick<Video, 'id' | 'user_id' | 'user_name' | 'title' | 'description' | 'created_at' | 'published_at' | 'url' | 'thumbnail_url' | 'view_count' | 'duration'>
   ) }
 );
->>>>>>> feature/VODDownload
 
 export type VideosQueryVariables = Exact<{
   user_id: Scalars['String'];
-  after?: InputMaybe<Scalars['String']>;
-  before?: InputMaybe<Scalars['String']>;
-  first?: InputMaybe<Scalars['String']>;
-  period?: InputMaybe<Scalars['String']>;
-  sort?: InputMaybe<Scalars['String']>;
-  type?: InputMaybe<Scalars['String']>;
+  after?: Maybe<Scalars['String']>;
+  before?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['String']>;
+  period?: Maybe<Scalars['String']>;
+  sort?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
 }>;
 
 
-<<<<<<< HEAD
-export type VideosQuery = { __typename?: 'Query', Videos_getByUser: { __typename?: 'Videos', videos: Array<{ __typename?: 'Video', id: string, title: string, description: string, created_at: string, published_at: string, url: string, thumbnail_url: string, viewable: string, view_count: number, duration: string }>, pagination: { __typename?: 'Pagination', cursor?: string | null } } };
-=======
 export type VideosQuery = (
   { __typename?: 'Query' }
   & { Videos_getByUser: (
@@ -353,7 +286,6 @@ export type VideosQuery = (
     ) }
   ) }
 );
->>>>>>> feature/VODDownload
 
 export type VideostateQueryVariables = Exact<{
   video_id: Scalars['String'];
@@ -400,9 +332,9 @@ export const useChannelQuery = <
       TData = ChannelQuery,
       TError = unknown
     >(
-      variables: ChannelQueryVariables,
+      variables: ChannelQueryVariables, 
       options?: UseQueryOptions<ChannelQuery, TError, TData>
-    ) =>
+    ) => 
     useQuery<ChannelQuery, TError, TData>(
       ['Channel', variables],
       customFetcher<ChannelQuery, ChannelQueryVariables>(ChannelDocument, variables),
@@ -437,9 +369,9 @@ export const useClipsQuery = <
       TData = ClipsQuery,
       TError = unknown
     >(
-      variables: ClipsQueryVariables,
+      variables: ClipsQueryVariables, 
       options?: UseQueryOptions<ClipsQuery, TError, TData>
-    ) =>
+    ) => 
     useQuery<ClipsQuery, TError, TData>(
       ['Clips', variables],
       customFetcher<ClipsQuery, ClipsQueryVariables>(ClipsDocument, variables),
@@ -454,11 +386,11 @@ export const useHelloQuery = <
       TData = HelloQuery,
       TError = unknown
     >(
-      variables?: HelloQueryVariables,
+      variables?: HelloQueryVariables, 
       options?: UseQueryOptions<HelloQuery, TError, TData>
-    ) =>
+    ) => 
     useQuery<HelloQuery, TError, TData>(
-      variables === undefined ? ['Hello'] : ['Hello', variables],
+      ['Hello', variables],
       customFetcher<HelloQuery, HelloQueryVariables>(HelloDocument, variables),
       options
     );
@@ -480,9 +412,9 @@ export const useSearchChannelsQuery = <
       TData = SearchChannelsQuery,
       TError = unknown
     >(
-      variables: SearchChannelsQueryVariables,
+      variables: SearchChannelsQueryVariables, 
       options?: UseQueryOptions<SearchChannelsQuery, TError, TData>
-    ) =>
+    ) => 
     useQuery<SearchChannelsQuery, TError, TData>(
       ['SearchChannels', variables],
       customFetcher<SearchChannelsQuery, SearchChannelsQueryVariables>(SearchChannelsDocument, variables),
@@ -509,9 +441,9 @@ export const useVideoQuery = <
       TData = VideoQuery,
       TError = unknown
     >(
-      variables: VideoQueryVariables,
+      variables: VideoQueryVariables, 
       options?: UseQueryOptions<VideoQuery, TError, TData>
-    ) =>
+    ) => 
     useQuery<VideoQuery, TError, TData>(
       ['Video', variables],
       customFetcher<VideoQuery, VideoQueryVariables>(VideoDocument, variables),
@@ -550,9 +482,9 @@ export const useVideosQuery = <
       TData = VideosQuery,
       TError = unknown
     >(
-      variables: VideosQueryVariables,
+      variables: VideosQueryVariables, 
       options?: UseQueryOptions<VideosQuery, TError, TData>
-    ) =>
+    ) => 
     useQuery<VideosQuery, TError, TData>(
       ['Videos', variables],
       customFetcher<VideosQuery, VideosQueryVariables>(VideosDocument, variables),
