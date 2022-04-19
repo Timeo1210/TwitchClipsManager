@@ -1,4 +1,4 @@
-import { useQuery, UseQueryOptions } from 'react-query';
+import { useMutation, UseMutationOptions, useQuery, UseQueryOptions } from 'react-query';
 import { customFetcher } from '@/utils/graphqlFetcher';
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
@@ -53,13 +53,28 @@ export type Clips = {
   pagination: Pagination;
 };
 
+export type Mutation = {
+  __typename?: 'Mutation';
+  Videostate_postById?: Maybe<Videostate>;
+};
+
+
+export type MutationVideostate_PostByIdArgs = {
+  request: PostByIdVideostateInput;
+};
+
 export type Pagination = {
   __typename?: 'Pagination';
   cursor?: Maybe<Scalars['String']>;
 };
 
+export type PostByIdVideostateInput = {
+  video_id: Scalars['String'];
+};
+
 export type Query = {
   __typename?: 'Query';
+<<<<<<< HEAD
   Channel_get: Channel;
   Clips_getByBroadcasterId: Clips;
   Hello_hello: Scalars['String'];
@@ -89,6 +104,39 @@ export type QuerySearchChannels_SearchArgs = {
   first?: InputMaybe<Scalars['Int']>;
   live_only?: InputMaybe<Scalars['Boolean']>;
   query: Scalars['String'];
+=======
+  Hello_hello: Scalars['String'];
+  SearchChannels_search: Array<SearchChannels>;
+  Channel_get: Channel;
+  Videos_getByUser: Videos;
+  Video_getById: Video;
+  Clips_getByBroadcasterId: Clips;
+  Videostate_getById: Videostate;
+};
+
+
+export type QuerySearchChannels_SearchArgs = {
+  query: Scalars['String'];
+  first?: Maybe<Scalars['Int']>;
+  after?: Maybe<Scalars['String']>;
+  live_only?: Maybe<Scalars['Boolean']>;
+};
+
+
+export type QueryChannel_GetArgs = {
+  id: Scalars['String'];
+};
+
+
+export type QueryVideos_GetByUserArgs = {
+  user_id: Scalars['String'];
+  after?: Maybe<Scalars['String']>;
+  before?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['String']>;
+  period?: Maybe<Scalars['String']>;
+  sort?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
+>>>>>>> feature/VODDownload
 };
 
 
@@ -97,6 +145,7 @@ export type QueryVideo_GetByIdArgs = {
 };
 
 
+<<<<<<< HEAD
 export type QueryVideos_GetByUserArgs = {
   after?: InputMaybe<Scalars['String']>;
   before?: InputMaybe<Scalars['String']>;
@@ -105,6 +154,20 @@ export type QueryVideos_GetByUserArgs = {
   sort?: InputMaybe<Scalars['String']>;
   type?: InputMaybe<Scalars['String']>;
   user_id: Scalars['String'];
+=======
+export type QueryClips_GetByBroadcasterIdArgs = {
+  broadcaster_id: Scalars['String'];
+  after?: Maybe<Scalars['String']>;
+  before?: Maybe<Scalars['String']>;
+  ended_at?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Float']>;
+  started_at?: Maybe<Scalars['String']>;
+>>>>>>> feature/VODDownload
+};
+
+
+export type QueryVideostate_GetByIdArgs = {
+  video_id: Scalars['String'];
 };
 
 export type SearchChannels = {
@@ -149,12 +212,42 @@ export type Videos = {
   videos: Array<Video>;
 };
 
+export type Videostate = {
+  __typename?: 'Videostate';
+  video_id: Scalars['String'];
+  state: Scalars['String'];
+  download_url: Scalars['String'];
+};
+
+export type VideostateActionMutationVariables = Exact<{
+  request: Scalars['String'];
+}>;
+
+
+export type VideostateActionMutation = (
+  { __typename?: 'Mutation' }
+  & { Videostate_postById?: Maybe<(
+    { __typename?: 'Videostate' }
+    & Pick<Videostate, 'video_id' | 'state' | 'download_url'>
+  )> }
+);
+
 export type ChannelQueryVariables = Exact<{
   id: Scalars['String'];
 }>;
 
 
+<<<<<<< HEAD
 export type ChannelQuery = { __typename?: 'Query', Channel_get: { __typename?: 'Channel', id: string, display_name: string, profile_image_url: string, view_count: number } };
+=======
+export type ChannelQuery = (
+  { __typename?: 'Query' }
+  & { Channel_get: (
+    { __typename?: 'Channel' }
+    & Pick<Channel, 'id' | 'display_name' | 'profile_image_url' | 'view_count'>
+  ) }
+);
+>>>>>>> feature/VODDownload
 
 export type ClipsQueryVariables = Exact<{
   broadcaster_id: Scalars['String'];
@@ -166,12 +259,35 @@ export type ClipsQueryVariables = Exact<{
 }>;
 
 
+<<<<<<< HEAD
 export type ClipsQuery = { __typename?: 'Query', Clips_getByBroadcasterId: { __typename?: 'Clips', clips: Array<{ __typename?: 'Clip', id: string, url: string, title: string, view_count: number, created_at: string, thumbnail_url: string, duration: number }>, pagination: { __typename?: 'Pagination', cursor?: string | null } } };
+=======
+export type ClipsQuery = (
+  { __typename?: 'Query' }
+  & { Clips_getByBroadcasterId: (
+    { __typename?: 'Clips' }
+    & { clips: Array<(
+      { __typename?: 'Clip' }
+      & Pick<Clip, 'id' | 'url' | 'title' | 'view_count' | 'created_at' | 'thumbnail_url' | 'duration'>
+    )>, pagination: (
+      { __typename?: 'Pagination' }
+      & Pick<Pagination, 'cursor'>
+    ) }
+  ) }
+);
+>>>>>>> feature/VODDownload
 
 export type HelloQueryVariables = Exact<{ [key: string]: never; }>;
 
 
+<<<<<<< HEAD
 export type HelloQuery = { __typename?: 'Query', Hello_hello: string };
+=======
+export type HelloQuery = (
+  { __typename?: 'Query' }
+  & Pick<Query, 'Hello_hello'>
+);
+>>>>>>> feature/VODDownload
 
 export type SearchChannelsQueryVariables = Exact<{
   query: Scalars['String'];
@@ -181,14 +297,34 @@ export type SearchChannelsQueryVariables = Exact<{
 }>;
 
 
+<<<<<<< HEAD
 export type SearchChannelsQuery = { __typename?: 'Query', SearchChannels_search: Array<{ __typename?: 'SearchChannels', id: string, display_name: string, thumbnail_url: string }> };
+=======
+export type SearchChannelsQuery = (
+  { __typename?: 'Query' }
+  & { SearchChannels_search: Array<(
+    { __typename?: 'SearchChannels' }
+    & Pick<SearchChannels, 'id' | 'display_name' | 'thumbnail_url'>
+  )> }
+);
+>>>>>>> feature/VODDownload
 
 export type VideoQueryVariables = Exact<{
   id: Scalars['String'];
 }>;
 
 
+<<<<<<< HEAD
 export type VideoQuery = { __typename?: 'Query', Video_getById: { __typename?: 'Video', id: string, user_id: string, user_name: string, title: string, description: string, created_at: string, published_at: string, url: string, thumbnail_url: string, view_count: number, duration: string } };
+=======
+export type VideoQuery = (
+  { __typename?: 'Query' }
+  & { Video_getById: (
+    { __typename?: 'Video' }
+    & Pick<Video, 'id' | 'user_id' | 'user_name' | 'title' | 'description' | 'created_at' | 'published_at' | 'url' | 'thumbnail_url' | 'view_count' | 'duration'>
+  ) }
+);
+>>>>>>> feature/VODDownload
 
 export type VideosQueryVariables = Exact<{
   user_id: Scalars['String'];
@@ -201,9 +337,55 @@ export type VideosQueryVariables = Exact<{
 }>;
 
 
+<<<<<<< HEAD
 export type VideosQuery = { __typename?: 'Query', Videos_getByUser: { __typename?: 'Videos', videos: Array<{ __typename?: 'Video', id: string, title: string, description: string, created_at: string, published_at: string, url: string, thumbnail_url: string, viewable: string, view_count: number, duration: string }>, pagination: { __typename?: 'Pagination', cursor?: string | null } } };
+=======
+export type VideosQuery = (
+  { __typename?: 'Query' }
+  & { Videos_getByUser: (
+    { __typename?: 'Videos' }
+    & { videos: Array<(
+      { __typename?: 'Video' }
+      & Pick<Video, 'id' | 'title' | 'description' | 'created_at' | 'published_at' | 'url' | 'thumbnail_url' | 'viewable' | 'view_count' | 'duration'>
+    )>, pagination: (
+      { __typename?: 'Pagination' }
+      & Pick<Pagination, 'cursor'>
+    ) }
+  ) }
+);
+>>>>>>> feature/VODDownload
+
+export type VideostateQueryVariables = Exact<{
+  video_id: Scalars['String'];
+}>;
 
 
+export type VideostateQuery = (
+  { __typename?: 'Query' }
+  & { Videostate_getById: (
+    { __typename?: 'Videostate' }
+    & Pick<Videostate, 'video_id' | 'state' | 'download_url'>
+  ) }
+);
+
+
+export const VideostateActionDocument = `
+    mutation VideostateAction($request: String!) {
+  Videostate_postById(request: {video_id: $request}) {
+    video_id
+    state
+    download_url
+  }
+}
+    `;
+export const useVideostateActionMutation = <
+      TError = unknown,
+      TContext = unknown
+    >(options?: UseMutationOptions<VideostateActionMutation, TError, VideostateActionMutationVariables, TContext>) => 
+    useMutation<VideostateActionMutation, TError, VideostateActionMutationVariables, TContext>(
+      (variables?: VideostateActionMutationVariables) => customFetcher<VideostateActionMutation, VideostateActionMutationVariables>(VideostateActionDocument, variables)(),
+      options
+    );
 export const ChannelDocument = `
     query Channel($id: String!) {
   Channel_get(id: $id) {
@@ -374,5 +556,26 @@ export const useVideosQuery = <
     useQuery<VideosQuery, TError, TData>(
       ['Videos', variables],
       customFetcher<VideosQuery, VideosQueryVariables>(VideosDocument, variables),
+      options
+    );
+export const VideostateDocument = `
+    query Videostate($video_id: String!) {
+  Videostate_getById(video_id: $video_id) {
+    video_id
+    state
+    download_url
+  }
+}
+    `;
+export const useVideostateQuery = <
+      TData = VideostateQuery,
+      TError = unknown
+    >(
+      variables: VideostateQueryVariables, 
+      options?: UseQueryOptions<VideostateQuery, TError, TData>
+    ) => 
+    useQuery<VideostateQuery, TError, TData>(
+      ['Videostate', variables],
+      customFetcher<VideostateQuery, VideostateQueryVariables>(VideostateDocument, variables),
       options
     );

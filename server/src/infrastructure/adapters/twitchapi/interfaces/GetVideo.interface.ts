@@ -1,7 +1,7 @@
-import { VideoEntity } from "@/core/entity/Video.entity";
+import { VideoTwitchapiEntity } from "./entity/Video.twitchapi.entity";
 
 export interface GetVideoInput {
   id: string;
 }
 
-export interface GetVideoOutput extends VideoEntity {}
+export type GetVideoOutput = VideoTwitchapiEntity;

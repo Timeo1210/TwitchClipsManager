@@ -1,4 +1,4 @@
-import { VideoEntity } from "@/core/entity/Video.entity";
+import { VideoTwitchapiEntity } from "./entity/Video.twitchapi.entity";
 
 export interface GetVideosInput {
   user_id: string;
@@ -11,7 +11,7 @@ export interface GetVideosInput {
 }
 
 export interface GetVideosOutput {
-  videos: VideoEntity[];
+  videos: VideoTwitchapiEntity[];
   pagination: {
     cursor: string;
   };

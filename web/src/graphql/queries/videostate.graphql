@@ -1,0 +1,7 @@
+query Videostate($video_id: String!) {
+  Videostate_getById(video_id: $video_id) {
+    video_id
+    state
+    download_url
+  }
+}
