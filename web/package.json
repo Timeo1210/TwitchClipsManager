@@ -2,6 +2,10 @@
   "name": "web",
   "version": "0.1.0",
   "private": true,
+  "resolutions": {
+    "@types/react": "17.0.11",
+    "@types/react-dom": "17.0.11"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -18,7 +22,7 @@
     "react-spring": "^9.2.4",
     "react-use": "^17.3.1",
     "react-virtualized-auto-sizer": "^1.0.6",
-    "react-window": "^1.8.6"
+    "react-window": "^1.8.7"
   },
   "devDependencies": {
     "@graphql-codegen/cli": "^2.6.2",
@@ -29,6 +33,7 @@
     "@tailwindcss/line-clamp": "^0.2.1",
     "@types/react": "17.0.11",
     "@types/react-datepicker": "^4.3.4",
+    "@types/react-dom": "17.0.11",
     "@types/react-virtualized-auto-sizer": "^1.0.1",
     "@types/react-window": "^1.8.5",
     "@typescript-eslint/eslint-plugin": "^4.27.0",
