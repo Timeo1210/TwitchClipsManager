@@ -33,4 +33,9 @@ const DownloadButton = ({
   </div>
 );
 
+DownloadButton.defaultProps = {
+  href: "",
+  className: "",
+};
+
 export default DownloadButton;

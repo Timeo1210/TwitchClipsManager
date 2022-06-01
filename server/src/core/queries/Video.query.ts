@@ -1,14 +1,8 @@
 import { VideoEntity } from "@/core/entity/Video.entity";
+import { GetVideosInput } from "@/infrastructure/adapters/twitchapi/interfaces/GetVideos.interface";
+import { GetVideoInput } from "@/infrastructure/adapters/twitchapi/interfaces/GetVideo.interface";
 
-export interface VideoGetByUserQueryInput {
-  user_id: string;
-  after?: string;
-  before?: string;
-  first?: string;
-  period?: "all" | "month" | "week" | "day";
-  sort?: "time" | "trending" | "views";
-  type?: "all" | "upload" | "archive" | "highlight";
-}
+export interface VideoGetByUserQueryInput extends GetVideosInput {}
 
 export interface VideoGetByUserQueryOutput {
   videos: VideoEntity[];
@@ -17,8 +11,6 @@ export interface VideoGetByUserQueryOutput {
   };
 }
 
-export interface VideoGetByIdQueryInput {
-  id: string;
-}
+export interface VideoGetByIdQueryInput extends GetVideoInput {}
 
-export interface VideoGetByIdQueryOutput extends VideoEntity {}
+export type VideoGetByIdQueryOutput = VideoEntity;

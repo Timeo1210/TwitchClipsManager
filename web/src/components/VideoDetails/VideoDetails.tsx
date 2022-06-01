@@ -1,22 +1,33 @@
-import React from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { VideoQuery } from "@/API";
+import { VideoQuery, useVideostateActionMutation } from "@/API";
 import { UnpackedArray } from "@/utils/UnpackedArray";
 import formatThumbnailUrl from "@/utils/formatThumbnailUrl";
 import formatVideoDate from "@/utils/formatVideoDate";
 import getVideoRawEndDate from "@/utils/getVideoRawEndDate";
+import calculateVODDownloadRawProcessTime from "@/utils/calculateVODDownloadRawProcessTime";
 import ActionButton from "@/components/ActionButton";
+import VideostateDetails from "@/components/VideostateDetails";
 import HoverEffectWrapper from "../HoverEffectWrapper";
 import GridCell from "./GridCell";
 
 type VideoDetailsProps = {
-  video: UnpackedArray<VideoQuery["getById"]>;
+  video: UnpackedArray<VideoQuery["Video_getById"]>;
 };
 
 const VideoDetails = ({ video }: VideoDetailsProps): JSX.Element => {
+  const [hasMutate, setHasMutate] = useState<boolean>(false);
   const videoThumbnailUrl = formatThumbnailUrl(video.thumbnail_url, 300, 169);
   const videoRawEndDate = getVideoRawEndDate(video.created_at, video.duration);
+  const VODDownloadProcessTime = calculateVODDownloadRawProcessTime(
+    video.duration
+  );
+
+  const useVideostateMutation = useVideostateActionMutation({
+    onMutate: () => setHasMutate(true),
+  });
+
   return (
     <div
       style={{
@@ -78,13 +89,19 @@ const VideoDetails = ({ video }: VideoDetailsProps): JSX.Element => {
         </div>
       </div>
       <div className="bg-gray-800 border-transparent bg-clip-padding border-2 border-t-0 flex justify-center">
-        <Link href="/videos/download">
-          <a>
-            <ActionButton className="m-2 p-2 text-3xl font-semibold">
-              <span className="tracking-widest">Télécharger</span>
-            </ActionButton>
-          </a>
-        </Link>
+        {hasMutate ? (
+          <VideostateDetails video_id={video.id} />
+        ) : (
+          <ActionButton
+            onClick={() => useVideostateMutation.mutate({ request: video.id })}
+            className="m-2 p-2 text-3xl font-semibold flex flex-col items-center text-center"
+          >
+            <span className="tracking-widest">Télécharger</span>
+            <span className="mt-1 text-xs">
+              (Environ {VODDownloadProcessTime} de traitement)
+            </span>
+          </ActionButton>
+        )}
       </div>
     </div>
   );

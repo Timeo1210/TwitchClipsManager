@@ -1,5 +1,5 @@
 query SearchChannels($query: String!, $first: Int, $after: String, $live_only: Boolean) {
-  search(query: $query, first: $first, after: $after, live_only: $live_only) {
+  SearchChannels_search(query: $query, first: $first, after: $after, live_only: $live_only) {
     id
     display_name
     thumbnail_url

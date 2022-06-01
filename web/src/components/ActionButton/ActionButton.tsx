@@ -19,4 +19,9 @@ const ActionButton = ({
   </button>
 );
 
+ActionButton.defaultProps = {
+  onClick: () => {},
+  className: "",
+};
+
 export default ActionButton;

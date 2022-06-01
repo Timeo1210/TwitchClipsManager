@@ -3,7 +3,9 @@ import getRelativeElapsedTime from "@/utils/getRelativeElapsedTime";
 import getVideoRawEndDate from "@/utils/getVideoRawEndDate";
 import { UnpackedArray } from "@/utils/UnpackedArray";
 
-export type Clip = UnpackedArray<ClipsQuery["getByBroadcasterId"]["clips"]>;
+export type Clip = UnpackedArray<
+  ClipsQuery["Clips_getByBroadcasterId"]["clips"]
+>;
 
 export type TimelineClipsArray = Array<Clip[]>;
 
@@ -11,7 +13,7 @@ export const getAllTimelineClips = (
   videoRawStartTime: string,
   videoRawDuration: string,
   interval: number,
-  clips: ClipsQuery["getByBroadcasterId"]["clips"]
+  clips: ClipsQuery["Clips_getByBroadcasterId"]["clips"]
 ): TimelineClipsArray => {
   const allTimelineClipsArray: TimelineClipsArray = new Array(interval)
     .fill(null)

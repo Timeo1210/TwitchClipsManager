@@ -8,7 +8,7 @@ import { QuerySearchArgs } from "../ArgsTypes/SearchChannels.argsType";
 @Resolver(SearchChannels)
 export class SearchChannelsResolver {
   @Query(() => [SearchChannels])
-  async search(@Args() request: QuerySearchArgs) {
+  async SearchChannels_search(@Args() request: QuerySearchArgs) {
     if (request.query === "") return [];
     return ChannelService.search(request);
   }

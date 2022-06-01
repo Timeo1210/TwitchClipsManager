@@ -22,7 +22,7 @@ const SearchBar = (): JSX.Element => {
       retry: false,
     }
   );
-  const channels = data?.search || [];
+  const channels = data?.SearchChannels_search || [];
 
   const showQueryResponse = () => {
     setQueryResponseVisible(true);

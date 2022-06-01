@@ -1,4 +1,4 @@
-import { useQuery, UseQueryOptions } from 'react-query';
+import { useMutation, UseMutationOptions, useQuery, UseQueryOptions } from 'react-query';
 import { customFetcher } from '@/utils/graphqlFetcher';
 export type Maybe<T> = T | null;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
@@ -52,23 +52,38 @@ export type Clips = {
   pagination: Pagination;
 };
 
+export type Mutation = {
+  __typename?: 'Mutation';
+  Videostate_postById?: Maybe<Videostate>;
+};
+
+
+export type MutationVideostate_PostByIdArgs = {
+  request: PostByIdVideostateInput;
+};
+
 export type Pagination = {
   __typename?: 'Pagination';
   cursor?: Maybe<Scalars['String']>;
 };
 
+export type PostByIdVideostateInput = {
+  video_id: Scalars['String'];
+};
+
 export type Query = {
   __typename?: 'Query';
-  hello: Scalars['String'];
-  search: Array<SearchChannels>;
-  get: Channel;
-  getByUser: Videos;
-  getById: Video;
-  getByBroadcasterId: Clips;
+  Hello_hello: Scalars['String'];
+  SearchChannels_search: Array<SearchChannels>;
+  Channel_get: Channel;
+  Videos_getByUser: Videos;
+  Video_getById: Video;
+  Clips_getByBroadcasterId: Clips;
+  Videostate_getById: Videostate;
 };
 
 
-export type QuerySearchArgs = {
+export type QuerySearchChannels_SearchArgs = {
   query: Scalars['String'];
   first?: Maybe<Scalars['Int']>;
   after?: Maybe<Scalars['String']>;
@@ -76,12 +91,12 @@ export type QuerySearchArgs = {
 };
 
 
-export type QueryGetArgs = {
+export type QueryChannel_GetArgs = {
   id: Scalars['String'];
 };
 
 
-export type QueryGetByUserArgs = {
+export type QueryVideos_GetByUserArgs = {
   user_id: Scalars['String'];
   after?: Maybe<Scalars['String']>;
   before?: Maybe<Scalars['String']>;
@@ -92,18 +107,23 @@ export type QueryGetByUserArgs = {
 };
 
 
-export type QueryGetByIdArgs = {
+export type QueryVideo_GetByIdArgs = {
   id: Scalars['String'];
 };
 
 
-export type QueryGetByBroadcasterIdArgs = {
+export type QueryClips_GetByBroadcasterIdArgs = {
   broadcaster_id: Scalars['String'];
   after?: Maybe<Scalars['String']>;
   before?: Maybe<Scalars['String']>;
   ended_at?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Float']>;
   started_at?: Maybe<Scalars['String']>;
+};
+
+
+export type QueryVideostate_GetByIdArgs = {
+  video_id: Scalars['String'];
 };
 
 export type SearchChannels = {
@@ -148,6 +168,26 @@ export type Videos = {
   pagination: Pagination;
 };
 
+export type Videostate = {
+  __typename?: 'Videostate';
+  video_id: Scalars['String'];
+  state: Scalars['String'];
+  download_url: Scalars['String'];
+};
+
+export type VideostateActionMutationVariables = Exact<{
+  request: Scalars['String'];
+}>;
+
+
+export type VideostateActionMutation = (
+  { __typename?: 'Mutation' }
+  & { Videostate_postById?: Maybe<(
+    { __typename?: 'Videostate' }
+    & Pick<Videostate, 'video_id' | 'state' | 'download_url'>
+  )> }
+);
+
 export type ChannelQueryVariables = Exact<{
   id: Scalars['String'];
 }>;
@@ -155,7 +195,7 @@ export type ChannelQueryVariables = Exact<{
 
 export type ChannelQuery = (
   { __typename?: 'Query' }
-  & { get: (
+  & { Channel_get: (
     { __typename?: 'Channel' }
     & Pick<Channel, 'id' | 'display_name' | 'profile_image_url' | 'view_count'>
   ) }
@@ -173,7 +213,7 @@ export type ClipsQueryVariables = Exact<{
 
 export type ClipsQuery = (
   { __typename?: 'Query' }
-  & { getByBroadcasterId: (
+  & { Clips_getByBroadcasterId: (
     { __typename?: 'Clips' }
     & { clips: Array<(
       { __typename?: 'Clip' }
@@ -190,7 +230,7 @@ export type HelloQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type HelloQuery = (
   { __typename?: 'Query' }
-  & Pick<Query, 'hello'>
+  & Pick<Query, 'Hello_hello'>
 );
 
 export type SearchChannelsQueryVariables = Exact<{
@@ -203,7 +243,7 @@ export type SearchChannelsQueryVariables = Exact<{
 
 export type SearchChannelsQuery = (
   { __typename?: 'Query' }
-  & { search: Array<(
+  & { SearchChannels_search: Array<(
     { __typename?: 'SearchChannels' }
     & Pick<SearchChannels, 'id' | 'display_name' | 'thumbnail_url'>
   )> }
@@ -216,7 +256,7 @@ export type VideoQueryVariables = Exact<{
 
 export type VideoQuery = (
   { __typename?: 'Query' }
-  & { getById: (
+  & { Video_getById: (
     { __typename?: 'Video' }
     & Pick<Video, 'id' | 'user_id' | 'user_name' | 'title' | 'description' | 'created_at' | 'published_at' | 'url' | 'thumbnail_url' | 'view_count' | 'duration'>
   ) }
@@ -235,7 +275,7 @@ export type VideosQueryVariables = Exact<{
 
 export type VideosQuery = (
   { __typename?: 'Query' }
-  & { getByUser: (
+  & { Videos_getByUser: (
     { __typename?: 'Videos' }
     & { videos: Array<(
       { __typename?: 'Video' }
@@ -247,10 +287,40 @@ export type VideosQuery = (
   ) }
 );
 
+export type VideostateQueryVariables = Exact<{
+  video_id: Scalars['String'];
+}>;
 
+
+export type VideostateQuery = (
+  { __typename?: 'Query' }
+  & { Videostate_getById: (
+    { __typename?: 'Videostate' }
+    & Pick<Videostate, 'video_id' | 'state' | 'download_url'>
+  ) }
+);
+
+
+export const VideostateActionDocument = `
+    mutation VideostateAction($request: String!) {
+  Videostate_postById(request: {video_id: $request}) {
+    video_id
+    state
+    download_url
+  }
+}
+    `;
+export const useVideostateActionMutation = <
+      TError = unknown,
+      TContext = unknown
+    >(options?: UseMutationOptions<VideostateActionMutation, TError, VideostateActionMutationVariables, TContext>) => 
+    useMutation<VideostateActionMutation, TError, VideostateActionMutationVariables, TContext>(
+      (variables?: VideostateActionMutationVariables) => customFetcher<VideostateActionMutation, VideostateActionMutationVariables>(VideostateActionDocument, variables)(),
+      options
+    );
 export const ChannelDocument = `
     query Channel($id: String!) {
-  get(id: $id) {
+  Channel_get(id: $id) {
     id
     display_name
     profile_image_url
@@ -272,7 +342,7 @@ export const useChannelQuery = <
     );
 export const ClipsDocument = `
     query Clips($broadcaster_id: String!, $after: String, $before: String, $first: Float, $started_at: String, $ended_at: String) {
-  getByBroadcasterId(
+  Clips_getByBroadcasterId(
     broadcaster_id: $broadcaster_id
     after: $after
     before: $before
@@ -309,7 +379,7 @@ export const useClipsQuery = <
     );
 export const HelloDocument = `
     query Hello {
-  hello
+  Hello_hello
 }
     `;
 export const useHelloQuery = <
@@ -326,7 +396,12 @@ export const useHelloQuery = <
     );
 export const SearchChannelsDocument = `
     query SearchChannels($query: String!, $first: Int, $after: String, $live_only: Boolean) {
-  search(query: $query, first: $first, after: $after, live_only: $live_only) {
+  SearchChannels_search(
+    query: $query
+    first: $first
+    after: $after
+    live_only: $live_only
+  ) {
     id
     display_name
     thumbnail_url
@@ -347,7 +422,7 @@ export const useSearchChannelsQuery = <
     );
 export const VideoDocument = `
     query Video($id: String!) {
-  getById(id: $id) {
+  Video_getById(id: $id) {
     id
     user_id
     user_name
@@ -376,7 +451,7 @@ export const useVideoQuery = <
     );
 export const VideosDocument = `
     query Videos($user_id: String!, $after: String, $before: String, $first: String, $period: String, $sort: String, $type: String) {
-  getByUser(
+  Videos_getByUser(
     user_id: $user_id
     after: $after
     before: $before
@@ -413,5 +488,26 @@ export const useVideosQuery = <
     useQuery<VideosQuery, TError, TData>(
       ['Videos', variables],
       customFetcher<VideosQuery, VideosQueryVariables>(VideosDocument, variables),
+      options
+    );
+export const VideostateDocument = `
+    query Videostate($video_id: String!) {
+  Videostate_getById(video_id: $video_id) {
+    video_id
+    state
+    download_url
+  }
+}
+    `;
+export const useVideostateQuery = <
+      TData = VideostateQuery,
+      TError = unknown
+    >(
+      variables: VideostateQueryVariables, 
+      options?: UseQueryOptions<VideostateQuery, TError, TData>
+    ) => 
+    useQuery<VideostateQuery, TError, TData>(
+      ['Videostate', variables],
+      customFetcher<VideostateQuery, VideostateQueryVariables>(VideostateDocument, variables),
       options
     );

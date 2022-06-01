@@ -9,7 +9,7 @@ import { GetByBroadcasterIdClipsArgs } from "../ArgsTypes/Clips.argsType";
 @Resolver()
 export class ClipsResolver {
   @Query(() => Clips)
-  async getByBroadcasterId(@Args() request: GetByBroadcasterIdClipsArgs) {
+  async Clips_getByBroadcasterId(@Args() request: GetByBroadcasterIdClipsArgs) {
     try {
       const response = await ClipService.getByBroadcasterId(request);
       if (response) return response;

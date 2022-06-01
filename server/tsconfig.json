@@ -24,7 +24,8 @@
     "paths": {
       "@/core/*": ["src/core/*"],
       "@/infrastructure/*": ["src/infrastructure/*"],
-      "@/interface-adapters/*": ["src/interface-adapters/*"]
+      "@/interface-adapters/*": ["src/interface-adapters/*"],
+      "@/data/*": ["data/*"]
     }
   },
   "exclude": ["node_modules"],

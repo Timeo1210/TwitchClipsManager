@@ -34,14 +34,17 @@ const VODsTool = (): JSX.Element => {
     type: "archive",
   });
 
-  const videos = [...queryStorage.oldVideos, ...(data?.getByUser.videos || [])];
-  const cursor = data?.getByUser.pagination.cursor || "";
+  const videos = [
+    ...queryStorage.oldVideos,
+    ...(data?.Videos_getByUser.videos || []),
+  ];
+  const cursor = data?.Videos_getByUser.pagination.cursor || "";
 
   useEffect(() => {
-    if (data?.getByUser.pagination.cursor === null) {
+    if (data?.Videos_getByUser.pagination.cursor === null) {
       setCanHandleMoreButton(false);
     }
-  }, [data?.getByUser.pagination.cursor]);
+  }, [data?.Videos_getByUser.pagination.cursor]);
 
   const handleMoreVOD = () => {
     if (!canHandleMoreButton) return; // useless

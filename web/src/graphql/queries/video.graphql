@@ -1,5 +1,5 @@
 query Video($id: String!) {
-  getById(id: $id) {
+  Video_getById(id: $id) {
     id
     user_id
     user_name
