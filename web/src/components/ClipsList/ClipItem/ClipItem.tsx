@@ -65,13 +65,9 @@ const ClipItem = ({
         </HoverEffectWrapper>
       </div>
       <div className="flex flex-col justify-between items-start pl-3 w-full text-left">
-        <Link href={`/clips/${clip.id}`}>
-          <a target="_blank" className="line-clamp-2">
-            <h2 className="inline text-lg underline-effect leading-4">
-              {clip.title}
-            </h2>
-          </a>
-        </Link>
+        <div className="line-clamp-2">
+          <h2 className="inline text-lg leading-4">{clip.title}</h2>
+        </div>
         <span className="text-gray-300">
           Nombre de vues : {clip.view_count}
         </span>
