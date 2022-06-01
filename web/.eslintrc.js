@@ -36,6 +36,7 @@ module.exports = {
         aspects: ["invalidHref", "preferButton"],
       },
     ],
+    "import/extensions": "off",
     "import/no-extraneous-dependencies": ["error", { packageDir: "./web/" }], // tricky but needed for the others package.json in project "./web/" in dev env
   },
 };
