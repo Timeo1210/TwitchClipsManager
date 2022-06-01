@@ -21,4 +21,9 @@ const GridCell = ({
   </span>
 );
 
+GridCell.defaultProps = {
+  borderRight: false,
+  borderBottom: false,
+};
+
 export default GridCell;
