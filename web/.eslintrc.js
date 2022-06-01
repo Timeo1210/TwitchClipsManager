@@ -37,6 +37,9 @@ module.exports = {
       },
     ],
     "import/extensions": "off",
-    "import/no-extraneous-dependencies": ["error", { packageDir: "./web/" }], // tricky but needed for the others package.json in project "./web/" in dev env
+    "import/no-extraneous-dependencies": [
+      "error",
+      { packageDir: process.env.NODE_ENV === "production" ? "./" : "./web/" },
+    ], // tricky but needed for the others package.json in project "./web/" in dev env
   },
 };
