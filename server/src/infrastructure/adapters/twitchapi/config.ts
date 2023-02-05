@@ -1,15 +1,4 @@
-import Ajv from "ajv";
 import { TwitchApi } from "./TwitchApi";
-
-import * as SearchChannelsInputSchema from "./schemas/SearchChannelsInput.schema.json";
-import * as SearchChannelsOutputSchema from "./schemas/SearchChannelsOutput.schema.json";
-
-import {
-  SearchChannelsInput,
-  SearchChannelsOutput,
-} from "./interfaces/SearchChannels.interface";
-
-const ajv = new Ajv();
 
 export const TwitchApiAdapter = {
   API: new TwitchApi({
@@ -30,11 +19,5 @@ export const TwitchApiAdapter = {
       TwitchApiAdapter.refreshSetup,
       1.8e6 // 30 min
     );
-  },
-  Validators: {
-    SearchChannels: {
-      input: ajv.compile<SearchChannelsInput>(SearchChannelsInputSchema),
-      output: ajv.compile<SearchChannelsOutput>(SearchChannelsOutputSchema),
-    },
   },
 };

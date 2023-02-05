@@ -35,7 +35,6 @@
     "webpack-node-externals": "^3.0.0"
   },
   "dependencies": {
-    "ajv": "^8.5.0",
     "apollo-server-core": "^3.0.0",
     "apollo-server-express": "^3.0.0",
     "axios": "^0.21.1",
