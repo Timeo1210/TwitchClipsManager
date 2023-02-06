@@ -17,19 +17,19 @@ import {
   GenerateMP4Output,
 } from "./interfaces/GenerateMP4.interface";
 
-const { API, Validators } = TwitchApiAdapter;
+// const { API, Validators } = TwitchApiAdapter;
+const { API } = TwitchApiAdapter;
 // no direct expoprt
 const searchChannels = async (
   input: SearchChannelsInput
 ): Promise<SearchChannelsOutput[]> => {
-  if (Validators.SearchChannels.input(input)) {
+  try {
     console.log(input);
     const data = await API.searchChannels(input);
-    if (Validators.SearchChannels.output(data)) {
-      return data;
-    }
+    return data;
+  } catch {
+    return [];
   }
-  return [];
 };
 
 const getUser = async (input: GetUserInput): Promise<GetUserOutput | null> => {
