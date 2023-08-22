@@ -1,12 +1,12 @@
-name: Docker Image CI
+name: Server Docker Image Build And Push
+
+# on:
+#   push:
+#     branches: [ "develop" ]
 
 on:
-  push:
-    branches: [ "develop" ]
-
-#on:
-#  release:
-#    types: [published]
+ release:
+   types: [published]
 
 jobs:
   docker:
