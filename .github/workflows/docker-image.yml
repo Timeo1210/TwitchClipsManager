@@ -17,6 +17,12 @@ jobs:
         name: Checkout
         uses: actions/checkout@v3
       -
+        name: Install nodes_modules
+        run: yarn install --production
+      -
+        name: Build project
+        run: yarn build
+      -
         name: Set up QEMU
         uses: docker/setup-qemu-action@v2
       -
