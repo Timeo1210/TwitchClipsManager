@@ -18,7 +18,7 @@ jobs:
         uses: actions/checkout@v3
       -
         name: Install nodes_modules
-        run: cd server && yarn install --production
+        run: cd server && yarn install --production=false
       -
         name: Build project
         run: cd server && yarn build
