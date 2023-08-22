@@ -17,6 +17,9 @@ jobs:
         name: Checkout
         uses: actions/checkout@v3
       -
+        name: Move to server
+        run: cd server
+      -
         name: Install nodes_modules
         run: yarn install --production
       -
@@ -38,8 +41,10 @@ jobs:
         name: Build and push
         uses: docker/build-push-action@v4
         with:
-          context: ./server
-          file: ./server/Dockerfile
+          #context: ./server
+          #file: ./server/Dockerfile
+          context: ./
+          file: ./Dockerfile
           platforms: linux/amd64
           push: true
           tags: timeo1210/twitchclipsmanagerbackend:latest
