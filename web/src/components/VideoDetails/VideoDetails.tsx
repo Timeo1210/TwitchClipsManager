@@ -92,15 +92,20 @@ const VideoDetails = ({ video }: VideoDetailsProps): JSX.Element => {
         {hasMutate ? (
           <VideostateDetails video_id={video.id} />
         ) : (
-          <ActionButton
-            onClick={() => useVideostateMutation.mutate({ request: video.id })}
-            className="m-2 p-2 text-3xl font-semibold flex flex-col items-center text-center"
+          <div
+            className="flex flex-col items-center"
+            title="Cette fonctionnalité est actuellement désactivée"
           >
-            <span className="tracking-widest">Télécharger</span>
-            <span className="mt-1 text-xs">
-              (Environ {VODDownloadProcessTime} de traitement)
-            </span>
-          </ActionButton>
+            <ActionButton
+              // onClick={() => useVideostateMutation.mutate({ request: video.id })}
+              className="m-2 p-2 text-3xl font-semibold flex flex-col items-center text-center cursor-not-allowed opacity-25 hover:opacity-10"
+            >
+              <span className="tracking-widest">Télécharger</span>
+              <span className="mt-1 text-xs">
+                (Environ {VODDownloadProcessTime} de traitement)
+              </span>
+            </ActionButton>
+          </div>
         )}
       </div>
     </div>
