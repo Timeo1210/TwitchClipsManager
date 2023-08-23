@@ -1,9 +1,9 @@
+import { UseQueryResult } from "react-query";
 import {
   useClipsQuery as useClipsQueryAPI,
   ClipsQueryVariables,
   ClipsQuery,
 } from "@/API";
-import { UseQueryResult } from "react-query";
 
 let lastVariables: ClipsQueryVariables | undefined;
 

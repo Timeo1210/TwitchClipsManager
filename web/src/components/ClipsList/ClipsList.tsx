@@ -51,7 +51,8 @@ const ClipsList = ({
     )}
     {clips && (
       <AutoSizer disableWidth>
-        {({ height }) => (
+        {/* eslint-disable-next-line */}
+        {({ height }: { height: number }) => (
           <List
             className="custom-scrollbar"
             height={height - 60} // check THIS

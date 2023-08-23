@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { VideoQuery, useVideostateActionMutation } from "@/API";
+import { VideoQuery } from "@/API";
 import { UnpackedArray } from "@/utils/UnpackedArray";
 import formatThumbnailUrl from "@/utils/formatThumbnailUrl";
 import formatVideoDate from "@/utils/formatVideoDate";
@@ -17,16 +17,16 @@ type VideoDetailsProps = {
 };
 
 const VideoDetails = ({ video }: VideoDetailsProps): JSX.Element => {
-  const [hasMutate, setHasMutate] = useState<boolean>(false);
+  const [hasMutate] = useState<boolean>(false);
   const videoThumbnailUrl = formatThumbnailUrl(video.thumbnail_url, 300, 169);
   const videoRawEndDate = getVideoRawEndDate(video.created_at, video.duration);
   const VODDownloadProcessTime = calculateVODDownloadRawProcessTime(
     video.duration
   );
 
-  const useVideostateMutation = useVideostateActionMutation({
-    onMutate: () => setHasMutate(true),
-  });
+  // const useVideostateMutation = useVideostateActionMutation({
+  //   onMutate: () => setHasMutate(true),
+  // });
 
   return (
     <div
