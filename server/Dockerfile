@@ -3,7 +3,11 @@ ENV NODE_ENV=production
 WORKDIR /usr/src/app 
 COPY package.json ./ 
 COPY yarn.lock ./ 
-RUN yarn install --frozen-lockfile 
+RUN apk --no-cache add --virtual native-deps \
+  g++ gcc libgcc libstdc++ linux-headers make python && \
+  npm install --quiet node-gyp -g &&\
+  yarn install --frozen-lockfile  && \
+  apk del native-deps
 COPY ./build ./build 
 COPY .env.example .env.example 
 EXPOSE 4990 
