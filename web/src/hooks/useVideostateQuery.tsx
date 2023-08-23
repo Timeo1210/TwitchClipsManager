@@ -1,9 +1,9 @@
+import { UseQueryResult } from "react-query";
 import {
   useVideostateQuery as useVideostateQueryAPI,
   VideostateQueryVariables,
   VideostateQuery,
 } from "@/API";
-import { UseQueryResult } from "react-query";
 
 const useVideostateQuery = (
   variables: VideostateQueryVariables

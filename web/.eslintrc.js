@@ -24,6 +24,7 @@ module.exports = {
         : "./web/tsconfig.json", // "./web/tsconfig.json" in dev env
   },
   plugins: ["@typescript-eslint", "react", "react-hooks", "prettier"],
+  ignorePatterns: ["src/generated/graphql.ts"],
   rules: {
     "react/jsx-props-no-spreading": "off",
     "react/react-in-jsx-scope": "off",
