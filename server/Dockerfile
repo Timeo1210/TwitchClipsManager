@@ -4,7 +4,7 @@ WORKDIR /usr/src/app
 COPY package.json ./ 
 COPY yarn.lock ./ 
 RUN apk --no-cache add --virtual native-deps \
-  g++ gcc libgcc libstdc++ linux-headers make python && \
+  g++ gcc libgcc libstdc++ linux-headers make python3 && \
   npm install --quiet node-gyp -g &&\
   yarn install --frozen-lockfile  && \
   apk del native-deps
