@@ -6,6 +6,7 @@ import { ReactQueryDevtools } from "react-query/devtools";
 import queryClient from "@/utils/queryClient";
 import "@/styles/globals.css";
 import "@/styles/react-datepicker/custom-react-datepicker.css";
+import { Analytics } from "@vercel/analytics/react";
 
 // static-cdn.jtvnw.net *.twitch.tv
 const CSP = `
@@ -31,6 +32,7 @@ const MyApp = ({ Component, pageProps }: AppProps): JSX.Element => (
         </Head>
         <Component {...pageProps} />
         <ReactQueryDevtools initialIsOpen />
+        <Analytics />
       </QueryClientProvider>
     </StrictMode>
   </>
