@@ -4,7 +4,8 @@
 
 This is a full web application for downloading twitch clips and vods.
 It's write in Typescript and use `next.js` and `graphql`
-Live project on [twitchclipsmanager](https://twitchclipsmanager.cf/)
+
+### Live project on [twitchclipsmanager](https://twitchclipsmanager.exnihilo.place/)
 
 ## Backend
 
