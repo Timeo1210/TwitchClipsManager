@@ -3,10 +3,10 @@ import Head from "next/head";
 import type { AppProps } from "next/app";
 import { QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
+import { Analytics } from "@vercel/analytics/react";
 import queryClient from "@/utils/queryClient";
 import "@/styles/globals.css";
 import "@/styles/react-datepicker/custom-react-datepicker.css";
-import { Analytics } from "@vercel/analytics/react";
 
 // static-cdn.jtvnw.net *.twitch.tv
 const CSP = `
