@@ -13,6 +13,7 @@
     "gen": "graphql-codegen --config codegen.yml"
   },
   "dependencies": {
+    "@vercel/analytics": "^1.2.2",
     "graphql": "^15.5.1",
     "next": "12",
     "react": "^17.0.2",
